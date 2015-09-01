@@ -15,8 +15,12 @@
 	display:block; 
 	cursor: crosshair;
 	width:70%;
-	height:500px;
+	
 	border: 1px solid #bfbfbf;
+}
+.figurinhas {
+    height:100px;
+    width:100px;
 }
 
 #menu {
@@ -25,8 +29,8 @@
     margin-left: 20px;
 	display:block; 
 	cursor: crosshair;
-	width:25%;
-	height:500px;
+	width:10%;
+
 	border: 1px solid #bfbfbf;
 }
 </style>
@@ -41,20 +45,20 @@
  		<canvas id="board" style="border: 1px solid #d3d3d3;">Your browser does not support the HTML5 canvas tag.</canvas>
  		<div id="menu" style="border: 1px solid #d3d3d3;">
  		   
-			<svg  height='150px' width='150px' x='0' y='0' class='main'>
-			    <rect class='shape'  style='fill:yellow;' x='10' y='10' width='150px' height='150px' />
+			<svg  x='0' y='0' class='main figurinhas'>
+			    <rect class='shape figurinhas'  style='fill:yellow;' x='10' y='10' />
 			    <text font-size='30' class='text1'  style='fill:#333;' x='105' y='120'>1</text>
 			</svg>
-				<svg  height='150px' width='150px' x='0' y='0' class='main'>
-			    <rect class='shape'  style='fill:green;' x='10' y='10' width='150px' height='150px' />
+				<svg   x='0' y='0' class='main figurinhas'>
+			    <rect class='shape figurinhas'  style='fill:green;' x='10' y='10' />
 			    <text font-size='30' class='text1'  style='fill:#333;' x='105' y='120'>1</text>
 			</svg>
-				<svg  height='150px' width='150px' x='0' y='0' class='main'>
-			    <rect class='shape'  style='fill:red;' x='10' y='10' width='150px' height='150px' />
+				<svg   x='0' y='0' class='main figurinhas'>
+			    <rect class='shape figurinhas'  style='fill:red;' x='10' y='10'  />
 			    <text font-size='30' class='text1'  style='fill:#333;' x='105' y='120'>1</text>
 			</svg>
-			<svg  height='150px' width='150px' x='0' y='0' class='main'>
-			    <rect class='shape'  style='fill:blue;' x='10' y='10' width='150px' height='150px' />
+			<svg  x='0' y='0' class='main figurinhas'>
+			    <rect class='shape figurinhas'  style='fill:blue;' x='10' y='10'  />
 			    <text font-size='30' class='text1'  style='fill:#333;' x='105' y='120'>1</text>
 			</svg>
 		
@@ -64,10 +68,7 @@
 	</div>
 	<script>
 	    
-	    $(".shape").click(function(){
-	        var cor = $(this).css("fill");
-	        alert(cor);
-	    });
+	  
 	</script>
 </body>
 </html>

@@ -16,9 +16,13 @@ init : function() {//init
 
 	App.canvas = document.getElementById("board");
 	App.context = App.canvas.getContext('2d');
-    	window.addEventListener('resize', App.resizeCanvas, false);
-
-App.resizeCanvas();
+    window.addEventListener('resize', App.resizeCanvas, false);
+   App.resizeCanvas();
+   
+ $(".shape").click(function(){
+	        var cor = $(this).css("fill");
+	        alert(cor);
+});
 
 }//fim init
 
