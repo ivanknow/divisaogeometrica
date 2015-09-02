@@ -4,24 +4,22 @@
  * Dependences: Jquery, JqueryMobile
  */
 App = {
-canvas:null,
-context:null,
-resizeCanvas : function(){
-
-App.canvas.width = $("body").innerWidth() - ($("body").innerWidth() * 0.05);
-App.canvas.height = $("body").innerHeight() - ($("body").innerHeight() * 0.25);
-	//aqui será carregado o derenho correto
-},		
+		
 init : function() {//init
 
-	App.canvas = document.getElementById("board");
-	App.context = App.canvas.getContext('2d');
-    window.addEventListener('resize', App.resizeCanvas, false);
-   App.resizeCanvas();
    
- $(".shape").click(function(){
-	        var cor = $(this).css("fill");
-	        alert(cor);
+ $(".shape").click(function(evt){
+	       /* var cor = $(this).css("fill");
+	        $("#board").html(cor);
+	        var e = evt.target;
+    var dim = e.getBoundingClientRect();
+    var x = evt.clientX - dim.left;
+    var y = evt.clientY - dim.top;
+    alert("x: "+x+" y:"+y);*/
+   // alert("");
+    var content = $("<svg   x='0' y='0' class='main figurinhas'/>").append($(this).clone()).html();
+    var item = "<svg   x='0' y='0' class='main figurinhas'>"+content+"</svg>";
+    $("#board").html(item);
 });
 
 }//fim init
