@@ -3,37 +3,111 @@
  * 
  * Dependences: Jquery, JqueryMobile
  */
-App = {
+ 
+ /*$('#'+app.canvasId).hover(function(e) {
+			if (app.cursorDown) {
+				app.draft(e);
+			}
+		}, function() {
+			app.finishDraft();
+		});
+		$('#'+app.canvasId).mousemove(function(e) {
+			if (app.cursorDown) {
+				app.draft(e);
+			}
+		});
 		
+		$('#'+app.canvasId).mousedown(function(e) {
+			app.startDraft(e);
+		}).mouseup(function() {
+			app.finishDraft();
+		});*/
+App = {
+mousePressed:false,
+arestaPressedX:0,
+arestaPressedY:0,
+
 init : function() {//init
+ $( "#board" ).on( "mouseover", ".aresta", function(evt) {
+     var hasClass = $(this).attr("class");
+// console.log("eh a primeira?"+hasClass);
+        if(hasClass != "primeira aresta"){     
+        
+        
+        var p = $( this );
+        var position = p.position();
+      
+        $("#linemoved").attr("x2",position.left-8);
+        $("#linemoved").attr("y2",position.top-52); 
+        
+        $("#linemoved").attr("id","elemento");
+        
+        }
+        $(".primeira").attr("class","aresta");
+        
+ });
  
  $( "#board" ).on( "click", ".aresta", function(evt) {
-   alert("vai rolar tracinho"+evt);
+    
+     App.mousePressed = true;
+    
+    //  console.log("clicou na aresta");
+    
+    $(this).attr("class","primeira aresta");
    
-  // $("#board svg").append("<line x1='10' y1='10' x2='200' y2='200' style='stroke:rgb(255,0,0);stroke-width:2'></line>");
-  
-   var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+    //console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
+    
+    var p = $( this );
+    var position = p.position();
+   
+   // console.log( "left: " + position.left + ", top: " + position.top );
+    
+    App.arestaPressedX=position.left;
+    App.arestaPressedY=position.top;
+    
+    var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
     newLine.setAttribute('class','line');
-    newLine.setAttribute('x1','0');
-    newLine.setAttribute('y1','0');
-    newLine.setAttribute('x2','300');
-    newLine.setAttribute('y2','300');
+    newLine.setAttribute('id','linemoved');
+    newLine.setAttribute('x1',position.left-8);
+    newLine.setAttribute('y1',position.top-52);
+    newLine.setAttribute('x2',position.left-8);
+    newLine.setAttribute('y2',position.top-52);
+    
     $("#board svg").append(newLine);
-});
+ });
+  $( "#board" ).on( "mousemove", ".main", function(evt) {
+      console.log(App.mousePressed );
+      if(App.mousePressed === true){
+    // console.log("arrastando mouse na figura");
+     //console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
+     $("#linemoved").attr("x2",evt.pageX-8).attr("y2",evt.pageY-52);   
+      }
+  
+ });
+ 
+ $( "#board" ).on( "mousedown", ".main", function(evt) {
+   //  console.log("mouse apertado na figura");
+     
+   //console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
+ });
+ 
+  $( "#board" ).on( "mouseup", ".main", function(evt) {
+      App.mousePressed = false;
+ //    console.log(" mouse solto na figura");
+ //    console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
+     
+     $("#linemoved").remove();
+ });
 
 $(".shape").click(function(evt){
-	       /* var cor = $(this).css("fill");
-	        $("#board").html(cor);
-	        var e = evt.target;
-    var dim = e.getBoundingClientRect();
-    var x = evt.clientX - dim.left;
-    var y = evt.clientY - dim.top;
-    alert("x: "+x+" y:"+y);*/
-   // alert("");
+
     var content = $("<svg   x='0' y='0' class='main figurinhas'/>").append($(this).clone()).html();
     content+= "<circle cx='10' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
-   content+="<line x1='10' y1='10' x2='20' y2='20' style='stroke:rgb(255,0,0);stroke-width:2' />";
-    var item = "<svg   x='0' y='0' class='main figura'>"+content+"</svg>";
+    content+= "<circle cx='410' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
+    content+= "<circle cx='410' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
+    content+= "<circle cx='10' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
+ 
+    var item = "<svg   x='0' y='0' class='main figurasvg'>"+content+"</svg>";
     
     $("#board").html(item);
     
