@@ -22,7 +22,30 @@
 		}).mouseup(function() {
 			app.finishDraft();
 		});*/
+Figuras = {
+     quadrado:{
+        arestas:[
+            {vi:"v0",vf:"v1",d:410},
+            {vi:"v1",vf:"v2",d:410},
+            {vi:"v2",vf:"v3",d:410},
+            {vi:"v3",vf:"v0",d:410},
+            ],
+         
+         getSVG:function(elemento){
+            var content = $("<svg   x='0' y='0' class='main figurinhas'/>").append(elemento.clone()).html();
+            content+= "<circle cx='10' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
+            content+= "<circle cx='410' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
+            content+= "<circle cx='410' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
+            content+= "<circle cx='10' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
+ 
+             var item = "<svg   x='0' y='0' class='main figurasvg'>"+content+"</svg>";
+            return item;
+        },
+     },
+            
+}
 App = {
+figuraAtual:null,
 mousePressed:false,
 arestaPressedX:0,
 arestaPressedY:0,
@@ -100,14 +123,14 @@ init : function() {//init
  });
 
 $(".shape").click(function(evt){
-
-    var content = $("<svg   x='0' y='0' class='main figurinhas'/>").append($(this).clone()).html();
-    content+= "<circle cx='10' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
-    content+= "<circle cx='410' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
-    content+= "<circle cx='410' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
-    content+= "<circle cx='10' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
- 
-    var item = "<svg   x='0' y='0' class='main figurasvg'>"+content+"</svg>";
+    var item = null;
+    var tipo = $(this).attr("tipo");
+    if(tipo == "quadrado"){
+        App.figuraAtual = Figuras.quadrado;
+        
+    }
+        var elemento = $(this);
+       item =  App.figuraAtual.getSVG(elemento);
     
     $("#board").html(item);
     
