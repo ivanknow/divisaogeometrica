@@ -4,46 +4,6 @@
  * Dependences: Jquery, JqueryMobile
  */
  
- /*$('#'+app.canvasId).hover(function(e) {
-			if (app.cursorDown) {
-				app.draft(e);
-			}
-		}, function() {
-			app.finishDraft();
-		});
-		$('#'+app.canvasId).mousemove(function(e) {
-			if (app.cursorDown) {
-				app.draft(e);
-			}
-		});
-		
-		$('#'+app.canvasId).mousedown(function(e) {
-			app.startDraft(e);
-		}).mouseup(function() {
-			app.finishDraft();
-		});*/
-Figuras = {
-     quadrado:{
-        arestas:[
-            {vi:"v0",vf:"v1",d:410},
-            {vi:"v1",vf:"v2",d:410},
-            {vi:"v2",vf:"v3",d:410},
-            {vi:"v3",vf:"v0",d:410},
-            ],
-         
-         getSVG:function(elemento){
-            var content = $("<svg   x='0' y='0' class='main figurinhas'/>").append(elemento.clone()).html();
-            content+= "<circle cx='10' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
-            content+= "<circle cx='410' cy='10' r='9' fill='black' class='aresta' stroke-width='10'/>";
-            content+= "<circle cx='410' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
-            content+= "<circle cx='10' cy='410' r='9' fill='black' class='aresta' stroke-width='10'/>";
- 
-             var item = "<svg   x='0' y='0' class='main figurasvg'>"+content+"</svg>";
-            return item;
-        },
-     },
-            
-}
 App = {
 figuraAtual:null,
 mousePressed:false,
@@ -126,7 +86,7 @@ $(".shape").click(function(evt){
     var item = null;
     var tipo = $(this).attr("tipo");
     if(tipo == "quadrado"){
-        App.figuraAtual = Figuras.quadrado;
+        App.figuraAtual = App.Figuras.quadrado;
         
     }
         var elemento = $(this);
@@ -139,6 +99,37 @@ $(".shape").click(function(evt){
 
 }//fim init
 
+};
+
+
+App.Figuras = {
+     quadrado:{
+        vertices:[
+        {id:"v0",x:10,y:10},
+        {id:"v1",x:410,y:10},
+        {id:"v2",x:410,y:410},
+        {id:"v3",x:10,y:410}
+        ], 
+        arestas:[
+            {vi:"v0",vf:"v1",d:410},
+            {vi:"v1",vf:"v2",d:410},
+            {vi:"v2",vf:"v3",d:410},
+            {vi:"v3",vf:"v0",d:410},
+            ],
+         
+         getSVG:function(elemento){
+            var content = $("<svg   x='0' y='0' class='main figurinhas'/>").append(elemento.clone()).html();
+            
+            for (i = 0; i < this.vertices.length; i++)
+            {
+                content+= "<circle id='"+this.vertices[i].id+"' cx='"+this.vertices[i].x+"' cy='"+this.vertices[i].y+"' r='9' fill='black' class='aresta' stroke-width='10'/>";    
+            }
+ 
+             var item = "<svg   x='0' y='0' class='main figurasvg'>"+content+"</svg>";
+            return item;
+        },
+     },
+            
 };
 
 $(document).on("pagebeforecreate",function(event){
