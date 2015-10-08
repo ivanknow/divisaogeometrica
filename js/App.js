@@ -7,77 +7,68 @@
 App = {
 figuraAtual:null,
 mousePressed:false,
-arestaPressedX:0,
-arestaPressedY:0,
-
+viid:"",
+vfid:"",
+verticePressedX:0,
+verticePressedY:0,
+addNovaAresta:function(viid,vfid){
+	
+},
 init : function() {//init
- $( "#board" ).on( "mouseover", ".aresta", function(evt) {
+ $( "#board" ).on( "mouseover", ".vertice", function(evt) {
      var hasClass = $(this).attr("class");
-// console.log("eh a primeira?"+hasClass);
-        if(hasClass != "primeira aresta"){     
-        
-        
+
+        if(hasClass != "primeiro vertice"){  //se n for o primeiro ele termina   
         var p = $( this );
         var position = p.position();
       
         $("#linemoved").attr("x2",position.left-8);
         $("#linemoved").attr("y2",position.top-52); 
         
-        $("#linemoved").attr("id","elemento");
+        $("#linemoved").attr("id","elemento");//remove a propriedade de se mover
+        App.mousePressed = false;//
+        
+        //TODO adiciona nova aresta a figura
+        App.addNovaAresta()
         
         }
-        $(".primeira").attr("class","aresta");
+        $(".primeiro").attr("class","vertice");
         
  });
  
- $( "#board" ).on( "click", ".aresta", function(evt) {
+ $( "#board" ).on( "click", ".vertice", function(evt) {
     
      App.mousePressed = true;
     
-    //  console.log("clicou na aresta");
-    
-    $(this).attr("class","primeira aresta");
+    $(this).attr("class","primeiro vertice");
    
-    //console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
-    
+   
     var p = $( this );
     var position = p.position();
-   
-   // console.log( "left: " + position.left + ", top: " + position.top );
+
+    App.verticePressedX=position.left;
+    App.verticePressedY=position.top;
     
-    App.arestaPressedX=position.left;
-    App.arestaPressedY=position.top;
-    
-    var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
-    newLine.setAttribute('class','line');
+    var newLine =  geraLinha(position.left-8,position.top-52,position.left-8,position.top-52);
     newLine.setAttribute('id','linemoved');
-    newLine.setAttribute('x1',position.left-8);
-    newLine.setAttribute('y1',position.top-52);
-    newLine.setAttribute('x2',position.left-8);
-    newLine.setAttribute('y2',position.top-52);
     
     $("#board svg").append(newLine);
  });
   $( "#board" ).on( "mousemove", ".main", function(evt) {
       console.log(App.mousePressed );
       if(App.mousePressed === true){
-    // console.log("arrastando mouse na figura");
-     //console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
+
      $("#linemoved").attr("x2",evt.pageX-8).attr("y2",evt.pageY-52);   
       }
   
  });
  
  $( "#board" ).on( "mousedown", ".main", function(evt) {
-   //  console.log("mouse apertado na figura");
-     
-   //console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
+   
  });
  
   $( "#board" ).on( "mouseup", ".main", function(evt) {
       App.mousePressed = false;
- //    console.log(" mouse solto na figura");
- //    console.log("salva x e y:"+evt.pageX+" - "+evt.pageY);
      
      $("#linemoved").remove();
  });
@@ -100,7 +91,48 @@ $(".shape").click(function(evt){
 }//fim init
 
 };
+function geraArestas(figura){ 
+	var vi,vf,retorno="";
+	 for (i = 0; i < figura.arestas.length; i++)
+    {
+         
+	  for(j = 0; j < figura.vertices.length; j++){
+    	   if(figura.vertices[j].id == figura.arestas[i].vi)
+    	   {
+    		   vi = figura.vertices[j];
+    	   }
+       }
+       
+       for(j = 0; j < figura.vertices.length; j++){
+    	   if(figura.vertices[j].id == figura.arestas[i].vf)
+    	   {
+    		   vf = figura.vertices[j];
+    	   }
+       }
+       console.log("de "+figura.arestas[i].vi+" para "+figura.arestas[i].vf+"com "+figura.arestas[i].d);  
+       console.log("de ("+vi.x+","+vi.y+") para ("+vf.x+","+vf.y+")com "+figura.arestas[i].d);  
+	  
+	   var newLine =  geraLinha(vi.x,vi.y,vf.x,vf.y);
+	   var tmp = document.createElement("div");
+	   tmp.appendChild(newLine);
+	   console.log(tmp.innerHTML);
+	  
+	   retorno+=tmp.innerHTML;
+    }
+	 
+	return retorno;
+};
 
+function geraLinha(x1,y1,x2,y2){
+	var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+    newLine.setAttribute('class','line');
+   // newLine.setAttribute('id','linemoved');
+    newLine.setAttribute('x1',x1);
+    newLine.setAttribute('y1',y1);
+    newLine.setAttribute('x2',x2);
+    newLine.setAttribute('y2',y2);
+    return newLine;
+}
 
 App.Figuras = {
      quadrado:{
@@ -118,17 +150,23 @@ App.Figuras = {
             ],
          
          getSVG:function(elemento){
+        	 
             var content = $("<svg   x='0' y='0' class='main figurinhas'/>").append(elemento.clone()).html();
-            
+            //gera vertices
             for (i = 0; i < this.vertices.length; i++)
             {
-                content+= "<circle id='"+this.vertices[i].id+"' cx='"+this.vertices[i].x+"' cy='"+this.vertices[i].y+"' r='9' fill='black' class='aresta' stroke-width='10'/>";    
+                content+= "<circle id='"+this.vertices[i].id+"' cx='"+this.vertices[i].x+"' cy='"+this.vertices[i].y+"' r='9' fill='black' class='vertice' stroke-width='10'/>";    
             }
+            
+            //gera arestas
+            content+=geraArestas(this);
  
              var item = "<svg   x='0' y='0' class='main figurasvg'>"+content+"</svg>";
             return item;
         },
+        
      },
+     
             
 };
 
