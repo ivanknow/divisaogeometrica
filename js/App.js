@@ -3,7 +3,7 @@
  * 
  * Dependences: Jquery, JqueryMobile
  */
- 
+var App = App || {};
 App = {	figuraAtual : null,
 	mousePressed : false,
 	viid : "",
@@ -87,8 +87,8 @@ App = {	figuraAtual : null,
 			var tipo = $(this).attr("tipo");
 			if (tipo == "quadrado") {
 				App.figuraAtual = App.Figuras.quadrado;
-
 			}
+			
 			var elemento = $(this);
 			item = App.figuraAtual.getSVG(elemento);
 
@@ -98,125 +98,6 @@ App = {	figuraAtual : null,
 		});
 
 	}// fim init
-
-};
-function geraArestas(figura) {
-	var vi, vf, retorno = "";
-	for (i = 0; i < figura.arestas.length; i++) {
-
-		vi = getVerticeById(figura.arestas[i].vi, figura);
-
-		vf = getVerticeById(figura.arestas[i].vf, figura);
-
-		console.log("de " + figura.arestas[i].vi + " para "
-				+ figura.arestas[i].vf + "com " + figura.arestas[i].d);
-		console.log("de (" + vi.x + "," + vi.y + ") para (" + vf.x + "," + vf.y
-				+ ")com " + figura.arestas[i].d);
-
-		var newLine = geraLinha(vi.x, vi.y, vf.x, vf.y);
-		var tmp = document.createElement("div");
-		tmp.appendChild(newLine);
-		console.log(tmp.innerHTML);
-
-		retorno += tmp.innerHTML;
-	}
-
-	return retorno;
-};
-
-function geraLinha(x1, y1, x2, y2) {
-	var newLine = document
-			.createElementNS('http://www.w3.org/2000/svg', 'line');
-	newLine.setAttribute('class', 'line');
-	// newLine.setAttribute('id','linemoved');
-	newLine.setAttribute('x1', x1);
-	newLine.setAttribute('y1', y1);
-	newLine.setAttribute('x2', x2);
-	newLine.setAttribute('y2', y2);
-	return newLine;
-}
-
-function getVerticeById(verticeId, figura) {
-	for (j = 0; j < figura.vertices.length; j++) {
-		if (figura.vertices[j].id == verticeId) {
-			vi = figura.vertices[j];
-			return vi;
-		}
-	}
-}
-
-function contemAresta(vi, vf, figura) {
-	for (i = 0; i < figura.arestas.length; i++) {
-		if ((figura.arestas[i].vi == vi && figura.arestas[i].vf == vf)
-				|| (figura.arestas.vi[i] == vf && figura.arestas.vf[i] == vi)) {
-			return figura.arestas[i]
-		} else {
-			return false;
-		}
-	}
-}
-
-App.Figuras = {
-	quadrado : {
-		vertices : [ {
-			id : "v0",
-			x : 10,
-			y : 10
-		}, {
-			id : "v1",
-			x : 410,
-			y : 10
-		}, {
-			id : "v2",
-			x : 410,
-			y : 410
-		}, {
-			id : "v3",
-			x : 10,
-			y : 410
-		} ],
-		arestas : [ {
-			vi : "v0",
-			vf : "v1",
-			d : 410
-		}, {
-			vi : "v1",
-			vf : "v2",
-			d : 410
-		}, {
-			vi : "v2",
-			vf : "v3",
-			d : 410
-		}, {
-			vi : "v3",
-			vf : "v0",
-			d : 410
-		}, ],
-
-		getSVG : function(elemento) {
-
-			var content = $("<svg   x='0' y='0' class='main figurinhas'/>")
-					.append(elemento.clone()).html();
-			// gera vertices
-			for (i = 0; i < this.vertices.length; i++) {
-				content += "<circle id='"
-						+ this.vertices[i].id
-						+ "' cx='"
-						+ this.vertices[i].x
-						+ "' cy='"
-						+ this.vertices[i].y
-						+ "' r='9' fill='black' class='vertice' stroke-width='10'/>";
-			}
-
-			// gera arestas
-			content += geraArestas(this);
-
-			var item = "<svg   x='0' y='0' class='main figurasvg'>" + content
-					+ "</svg>";
-			return item;
-		},
-
-	},
 
 };
 
