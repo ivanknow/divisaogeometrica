@@ -42,13 +42,7 @@ App.Figuras = {
 					.append(elemento.clone()).html();
 			// gera vertices
 			for (i = 0; i < this.vertices.length; i++) {
-				content += "<circle id='"
-						+ this.vertices[i].id
-						+ "' cx='"
-						+ this.vertices[i].x
-						+ "' cy='"
-						+ this.vertices[i].y
-						+ "' r='9' fill='black' class='vertice' stroke-width='10'/>";
+				content += geraVertice(this.vertices[i]);
 			}
 
 			// gera arestas

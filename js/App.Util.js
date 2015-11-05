@@ -54,3 +54,31 @@ function geraArestas(figura) {
 
 	return retorno;
 }
+
+function getPontoMedio(viid, vfid, figura){
+   var vertice1 = getVerticeById(viid,figura);
+   var vertice2 = getVerticeById(vfid,figura);
+   
+   var medio = {
+			id :viid+"m"+vfid ,
+			x : 0,
+			y : 0
+		};
+		
+		medio.x = (vertice1.x+vertice2.x)/2;
+		medio.y = (vertice1.y+vertice2.y)/2;
+		
+		return medio;
+}
+
+function geraVertice(vertice){
+   var content = "<circle id='"
+						+ vertice.id
+						+ "' cx='"
+						+ vertice.x
+						+ "' cy='"
+						+ vertice.y
+						+ "' r='9' fill='black' class='vertice' stroke-width='10'/>";
+						
+						return content;
+}

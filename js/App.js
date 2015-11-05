@@ -11,36 +11,45 @@ App = {	figuraAtual : null,
 	verticePressedX : 0,
 	verticePressedY : 0,
 	addNovaAresta : function(viid, vfid) {
-
+    //TODO
 	},
 	init : function() {// init
 		$("#board").on("mouseover", ".vertice", function(evt) {
 			var hasClass = $(this).attr("class");
 
-			if (hasClass != "primeiro vertice") { // se n for o primeiro ele
+			if (hasClass != "primeiro vertice" && App.mousePressed) { // se n for o primeiro ele
 													// termina
+													
+				var id1 = $(".primeiro").attr("id");
+				var id2 = $(this).attr("id");
+			
 				var p = $(this);
 				var position = p.position();
 
 				$("#linemoved").attr("x2", position.left - 8);
 				$("#linemoved").attr("y2", position.top - 52);
 
-				$("#linemoved").attr("id", "elemento");// remove a propriedade
+				$("#linemoved").removeAttr("id");// remove a propriedade
 														// de se mover
 				App.mousePressed = false;//
 
 				// TODO adiciona nova aresta a figura
 				App.addNovaAresta();
-
+				
+				
+				//TODO inserir ponto medio
+				var medio = getPontoMedio(id1,id2,App.figuraAtual);
+                console.log(JSON.stringify(medio));
+                $(".figurasvg").append(geraVertice(medio));
+                $(".primeiro").attr("class", "vertice");
 			}
-			$(".primeiro").attr("class", "vertice");
+		
+			    
+			
 
 		});
 
-		$("#board").on(
-				"click",
-				".vertice",
-				function(evt) {
+		$("#board").on("click",	".vertice",	function(evt) {
 
 					App.mousePressed = true;
 
@@ -58,19 +67,19 @@ App = {	figuraAtual : null,
 					newLine.setAttribute('id', 'linemoved');
 
 					$("#board svg").append(newLine);
-				});
-		$("#board").on(
-				"mousemove",
-				".main",
-				function(evt) {
-					console.log(App.mousePressed);
+		});
+		
+		$("#board").on(	"mousemove",".main",function(evt) {
+					
+				//	console.log(App.mousePressed);
+					
 					if (App.mousePressed === true) {
 
 						$("#linemoved").attr("x2", evt.pageX - 8).attr("y2",
 								evt.pageY - 52);
 					}
 
-				});
+		});
 
 		$("#board").on("mousedown", ".main", function(evt) {
 
