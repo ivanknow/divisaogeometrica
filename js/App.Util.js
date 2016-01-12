@@ -78,7 +78,7 @@ function geraVertice(vertice){
 						+ vertice.x
 						+ "' cy='"
 						+ vertice.y
-						+ "' r='9' fill='black' class='vertice' stroke-width='10'/>";
+						+ "' r='13' fill='black' class='vertice' stroke-width='10'/>";
 						
 						return content;
 }
