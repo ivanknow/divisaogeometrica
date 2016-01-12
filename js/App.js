@@ -40,7 +40,16 @@ App = {	figuraAtual : null,
 				//TODO inserir ponto medio
 				var medio = getPontoMedio(id1,id2,App.figuraAtual);
                 console.log(JSON.stringify(medio));
-                $(".figurasvg").append(geraVertice(medio));
+                App.figuraAtual.vertices.push(medio);
+                App.figuraAtual.arestas.push({
+        			vi : id1,
+        			vf : id2,
+        			d : 0
+        		});
+               
+               var  item =  App.figuraAtual.updateSVG();
+
+    			$("#board").html(item);
                 $(".primeiro").attr("class", "vertice");
 			}
 		
@@ -92,6 +101,21 @@ App = {	figuraAtual : null,
 		});
 
 		$(".shape").click(function(evt) {
+			var item = null;
+			var tipo = $(this).attr("tipo");
+			if (tipo == "quadrado") {
+				App.figuraAtual = App.Figuras.quadrado;
+			}
+			
+			var elemento = $(this);
+			item = App.figuraAtual.getSVG(elemento);
+
+			$("#board").html(item);
+
+			$("#board  rect").attr("class", 'figura');
+		});
+		
+		$(".reset").click(function(evt) {
 			var item = null;
 			var tipo = $(this).attr("tipo");
 			if (tipo == "quadrado") {

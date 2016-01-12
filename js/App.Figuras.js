@@ -17,7 +17,8 @@ App.Figuras = {
 			id : "v3",
 			x : 10,
 			y : 410
-		} ],
+		}
+		],
 		arestas : [ {
 			vi : "v0",
 			vf : "v1",
@@ -35,11 +36,7 @@ App.Figuras = {
 			vf : "v0",
 			d : 410
 		}, ],
-
-		getSVG : function(elemento) {
-
-			var content = $("<svg   x='0' y='0' class='main figurinhas'/>")
-					.append(elemento.clone()).html();
+		generateArestasVertices:function(content){
 			// gera vertices
 			for (i = 0; i < this.vertices.length; i++) {
 				content += geraVertice(this.vertices[i]);
@@ -52,6 +49,20 @@ App.Figuras = {
 					+ "</svg>";
 			return item;
 		},
+		getSVG : function(elemento) {
+
+			var content = $("<svg   x='0' y='0' class='main figurinhas'/>")
+					.append(elemento.clone()).html();
+			
+			return this.generateArestasVertices(content);
+		},
+		
+		updateSVG:function(){
+			
+			var content = "";
+	
+			return this.generateArestasVertices(content);
+		}
 
 	},
 

@@ -39,15 +39,15 @@ function geraArestas(figura) {
 
 		vf = getVerticeById(figura.arestas[i].vf, figura);
 
-		console.log("de " + figura.arestas[i].vi + " para "
+		/*console.log("de " + figura.arestas[i].vi + " para "
 				+ figura.arestas[i].vf + "com " + figura.arestas[i].d);
 		console.log("de (" + vi.x + "," + vi.y + ") para (" + vf.x + "," + vf.y
-				+ ")com " + figura.arestas[i].d);
+				+ ")com " + figura.arestas[i].d);*/
 
 		var newLine = geraLinha(vi.x, vi.y, vf.x, vf.y);
 		var tmp = document.createElement("div");
 		tmp.appendChild(newLine);
-		console.log(tmp.innerHTML);
+//		console.log(tmp.innerHTML);
 
 		retorno += tmp.innerHTML;
 	}
