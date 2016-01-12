@@ -35,34 +35,7 @@ App.Figuras = {
 			vi : "v3",
 			vf : "v0",
 			d : 410
-		}, ],
-		generateArestasVertices:function(content){
-			// gera vertices
-			for (i = 0; i < this.vertices.length; i++) {
-				content += geraVertice(this.vertices[i]);
-			}
-
-			// gera arestas
-			content += geraArestas(this);
-
-			var item = "<svg   x='0' y='0' class='main figurasvg'>" + content
-					+ "</svg>";
-			return item;
-		},
-		getSVG : function(elemento) {
-
-			var content = $("<svg   x='0' y='0' class='main figurinhas'/>")
-					.append(elemento.clone()).html();
-			
-			return this.generateArestasVertices(content);
-		},
-		
-		updateSVG:function(){
-			
-			var content = "";
-	
-			return this.generateArestasVertices(content);
-		}
+		}, ]
 
 	},
 
