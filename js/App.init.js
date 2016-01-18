@@ -8,8 +8,8 @@ App.init = function() {// init
 		$("#board").on("mouseover", ".vertice", function(evt) {
 			var hasClass = $(this).attr("class");
 
-			if (hasClass != "primeiro vertice" && App.mousePressed) { 
-				// se nao for o primeiro ele termina
+			if (hasClass != "primeiro vertice" && hasClass != "proibida vertice" && App.mousePressed) { 
+				// se nao for o primeiro ou proibida ele termina
 
 				var id1 = $(".primeiro").attr("id");
 				var id2 = $(this).attr("id");
@@ -25,7 +25,7 @@ App.init = function() {// init
 				App.mousePressed = false;//
 
 				// TODO adiciona nova aresta a figura
-				App.addNovaAresta();
+				//App.addNovaAresta();
 
 				// TODO inserir ponto medio
 				var medio = getPontoMedio(id1, id2, App.figuraAtual);
@@ -41,6 +41,7 @@ App.init = function() {// init
 
 				$("#board").html(item);
 				$(".primeiro").attr("class", "vertice");
+				$(".proibida").attr("class", "vertice");
 			}
 
 		});
@@ -53,16 +54,19 @@ App.init = function() {// init
 					App.mousePressed = true;
 
 					$(this).attr("class", "primeiro vertice");
+					
+					var vid = $(this).attr("id");
+					
+					var priibidas = getProibidas(vid,App.figuraAtual);
+					for(var i=0;i<priibidas.length;i++){
+						$("#"+priibidas[i]).attr("class", "proibida vertice");
+					}
 
 					var p = $(this);
-					var position = p.position();
-
-					App.verticePressedX = position.left;
-					App.verticePressedY = position.top;
-
-					var newLine = geraLinha(position.left - 8,
-							position.top - 52, position.left - 8,
-							position.top - 52);
+					
+					var newLine = geraLinha($(this).attr("cx"),
+							$(this).attr("cy"), $(this).attr("cx"),
+							$(this).attr("cy"));
 					newLine.setAttribute('id', 'linemoved');
 
 					$("#board svg").append(newLine);
@@ -89,7 +93,8 @@ App.init = function() {// init
 
 		$("#board").on("mouseup", ".main", function(evt) {
 			App.mousePressed = false;
-
+			$(".primeiro").attr("class", "vertice");
+			$(".proibida").attr("class", "vertice");
 			$("#linemoved").remove();
 		});
 
@@ -99,8 +104,8 @@ App.init = function() {// init
 			
 			App.figuraAtual.style = $(this).attr("style");
 			if (tipo == "quadrado") {
-				App.figuraAtual.setVertices(App.Figuras.quadrado.vertices);
-				App.figuraAtual.setArestas(App.Figuras.quadrado.arestas);
+				App.figuraAtual.setVertices(clone(App.Figuras.quadrado.vertices));
+				App.figuraAtual.setArestas(clone(App.Figuras.quadrado.arestas));
 			}
 
 			//var elemento = $(this);
@@ -111,21 +116,6 @@ App.init = function() {// init
 			$("#board  rect").attr("class", 'figura');
 		});
 
-		$(".reset").click(function(evt) {
-			var item = null;
-			var tipo = $(this).attr("tipo");
-			if (tipo == "quadrado") {
-				App.figuraAtual.setVertices(App.Figuras.quadrado.vertices);
-				App.figuraAtual.setArestas(App.Figuras.quadrado.arestas);
-			}
-
-			var elemento = $(this);
-			item = App.figuraAtual.getSVG(elemento);
-
-			$("#board").html(item);
-
-			$("#board  rect").attr("class", 'figura');
-		});
 
 	};
 	
