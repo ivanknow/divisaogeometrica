@@ -99,68 +99,142 @@ function isAdjacente(viid, vfid, figura) {
 
 }
 
-function getProibidas(v, figura) {
+function getNosAdjacentes(v, figura) {
 	var vertice = getVerticeById(v, figura);
 	console.log(vertice);
-	var proibidas = new Array();
+	var adjacentes = new Array();
 	for (var i = 0; i < figura.arestas.length; i++) {
-		
+
 		if (figura.arestas[i].vi == vertice.id) {
-			proibidas.push(figura.arestas[i].vf);
+			adjacentes.push(figura.arestas[i].vf);
 		} else {
 			if (figura.arestas[i].vf == vertice.id) {
-				proibidas.push(figura.arestas[i].vi);
+				adjacentes.push(figura.arestas[i].vi);
 			}
 		}
 
 	}
-	
+
+	return adjacentes;
+
+}
+
+function getProibidas(v, figura) {
+	var vertice = getVerticeById(v, figura);
+
+	var proibidas = new Array();
+	proibidas = (getNosAdjacentes(v, figura));
+
 	return proibidas;
 
 }
 
-function dividirFigura(vi,vf,figura){
+function getCaminho(vi, vf, figura, caminho) {
 	
+	console.log("passou"+vi+"-"+vf);
+	console.log(caminho);
+	if(caminho === null){
+		caminho = new Array();
+	}
+	if(vi === vf){
+		return null;
+	}
+	
+	var aresta = null;
+	for (var i = 0; i < figura.arestas.length; i++) {
+		if(vi === figura.arestas[i].vi){
+			aresta = figura.arestas[i];
+		}
+	}
+	
+	if(caminho.indexOf(vi)!= -1){
+		//significa que tem um vi, ou seja loop
+		caminho.push(vi);
+		return null;
+	}
+	caminho.push(vi);
+	console.log(caminho);
+	if(aresta === null){
+		return null;
+	}
+	
+	if(vf === aresta.vf){
+		caminho.push(vf);
+		
+	}else{
+		var vx = aresta.vf;
+		getCaminho(vx, vf, figura, caminho);
+	}
+	
+	return caminho;
+	
+
 }
 
-function distanciaDoisPontos(v1,v2,figura){
-	var vi = getVerticeById(v1,figura);
+function dividirFigura(vi, vf, figura) {
+	// pega os adjacentes de vi
+	var adj = getNosAdjacentes(vi, figura);
+	// pega um caminho de vi ate vf
+	var caminho = getCaminho(vi, vf, figura, null);
+	if(caminho == null){
+		return null;
+	}
+	// o caminho que tiver
+	//sempre vao sr so duas adjacencias pq eu vou dividir
+	var adjEscolida = "";
+	if(caminho.indexOf(adj[0]) != -1){
+		//usa a 0
+		adjEscolida = adj[0];
+	}else{
+		//usa a 1
+		adjEscolida = adj[1];
+	}
+	
+	
+	
+
+}
+
+function distanciaDoisPontos(v1, v2, figura) {
+	var vi = getVerticeById(v1, figura);
 	console.log(vi);
-	var vf = getVerticeById(v2,figura);
+	var vf = getVerticeById(v2, figura);
 	console.log(vf);
-	return Math.sqrt(Math.pow(vf.x - vi.x,2)+Math.pow(vf.y - vi.y,2)); 
+	return Math.sqrt(Math.pow(vf.x - vi.x, 2) + Math.pow(vf.y - vi.y, 2));
 }
 
 function clone(obj) {
-    var copy;
+	var copy;
 
-    // Handle the 3 simple types, and null or undefined
-    if (null == obj || "object" != typeof obj) return obj;
+	// Handle the 3 simple types, and null or undefined
+	if (null == obj || "object" != typeof obj)
+		return obj;
 
-    // Handle Date
-    if (obj instanceof Date) {
-        copy = new Date();
-        copy.setTime(obj.getTime());
-        return copy;
-    }
+	// Handle Date
+	if (obj instanceof Date) {
+		copy = new Date();
+		copy.setTime(obj.getTime());
+		return copy;
+	}
 
-    // Handle Array
-    if (obj instanceof Array) {
-        copy = [];
-        for (var i = 0, len = obj.length; i < len; i++) {
-            copy[i] = clone(obj[i]);
-        }
-        return copy;
-    }
+	// Handle Array
+	if (obj instanceof Array) {
+		copy = [];
+		for (var i = 0, len = obj.length; i < len; i++) {
+			copy[i] = clone(obj[i]);
+		}
+		return copy;
+	}
 
-    // Handle Object
-    if (obj instanceof Object) {
-        copy = {};
-        for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
-        }
-        return copy;
-    }
+	// Handle Object
+	if (obj instanceof Object) {
+		copy = {};
+		for ( var attr in obj) {
+			if (obj.hasOwnProperty(attr))
+				copy[attr] = clone(obj[attr]);
+		}
+		return copy;
+	}
 
-    throw new Error("Unable to copy obj! Its type isn't supported.");
+	throw new Error("Unable to copy obj! Its type isn't supported.");
 }
