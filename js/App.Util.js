@@ -59,10 +59,26 @@ function geraArestas(figura) {
 function removeAresta(v1,v2,figura) {
 	for(var i = 0;i<figura.arestas.length;i++){
 		if(figura.arestas[i].vi === v1 && figura.arestas[i].vf === v2 ){
-			array.splice(i, 1);
+			figura.arestas.splice(i, 1);
 		}
 		if(figura.arestas[i].vf === v1 && figura.arestas[i].vi === v2 ){
-			array.splice(i, 1);
+			figura.arestas.splice(i, 1);
+		}
+	}
+}
+
+function removeVertice(v,figura) {
+	for(var i = 0;i<figura.vertices.length;i++){
+			if(figura.vertices[i].id === v){
+				figura.vertices.splice(i, 1);
+				console.log("remove "+ v);
+			}
+		}
+	for(var j = 0;j<figura.arestas.length;j++){
+
+		if(figura.arestas[j].vf == v || figura.arestas[j].vi == v ){
+			console.log("remove aresta");
+			figura.arestas.splice(j, 1);
 		}
 	}
 }
@@ -179,6 +195,41 @@ function getCaminho(vi, vf, figura, caminho) {
 
 	return caminho;
 
+
+}
+
+function removeVerticesOutOfThePath(vi, vf, figura){
+	var newPath = getPath(vi, vf, figura);
+	for(var i = 0;i<figura.vertices.length;i++){
+			if(newPath.indexOf(figura.vertices[i].id)===-1 ){
+				removeVertice(figura.vertices[i].id,figura);
+			}
+		}
+
+}
+
+function getPath(vi, vf, figura) {
+
+	if(vi === vf){
+			return [];
+	}else{
+
+				for (var i = 0; i < figura.arestas.length; i++) {
+
+						if(figura.arestas[i].vi === vi){
+								if(figura.arestas[i].vf === vf){
+
+								return [vi,vf];
+						}else{
+							var r = getPath(figura.arestas[i].vf,vf,figura);
+							return r.indexOf(v1) != -1?[]:[vi].concat(r);
+						}
+					}
+			}
+
+			return [];
+
+	}
 
 }
 

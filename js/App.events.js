@@ -68,6 +68,8 @@ App.events =  {
 				d : 0
 			});
 
+			removeVerticesOutOfThePath(medio.id,id1,App.figuraAtual);
+
 			var item = App.figuraAtual.updateSVG();
 
 			$("#board").html(item);
