@@ -3,18 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.mobile-1.4.5.min.js"></script>
-<script src="js/App.Util.js"></script>
-<script src="js/App.js"></script>
-<script src="js/App.Figura.Atual.js"></script>
-<script src="js/App.init.js"></script>
-<script src="js/App.Modelos.Figuras.js"></script>
+
+<link href="lib/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">
+<link href="lib/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+
+
 
 <style>
-#mainScreen { width:100%; } /* just to be sure these are full screen*/
-
 .primeiro{
 
 stroke:blue;
@@ -25,14 +21,6 @@ stroke:blue;
 stroke:red;
 }
 
-#board {
-    float:left;
-	display:block; 
-	cursor: crosshair;
-	width:70%;
-	
-	border: 1px solid #bfbfbf;
-}
 .figurinhas {
     height:100px;
     width:100px;
@@ -43,65 +31,61 @@ stroke:red;
     width:400px;
 }
 .figurasvg {
-    height:430px;
-    width:430px;
+    height:500px;
+    width:100%;
+    padding:20px;
 }
 
 .line{
     stroke:rgb(0,0,0);
     stroke-width:2;
-    
+
 }
 
-#menu {
-    min-width:110px;
-    float:left;
-    margin-left: 20px;
-	display:block; 
-	cursor: crosshair;
-	width:10%;
-
-	border: 1px solid #bfbfbf;
-}
 </style>
 </head>
 <body>
-	<div id="index" data-role="page">
-		<div data-role="header" data-position="fixed">
+	<div class="container">
+
 			<h3>Divisão Geométrica</h3>
-		</div>
-		<div data-role="main" id = "mainScreen" class="ui-content">
-		
- 		<div id="board" style="border: 1px solid #d3d3d3;">
- 		    
- 		    
+
+		<div>
+      <div id="menu">
+
+        <svg  x='0' y='0' class='main figurinhas'>
+            <rect class='shape figurinhas' tipo="quadrado"  style='fill:yellow;' x='10' y='10' />
+            <text font-size='30' class='text1'  style='fill:#333;' x='55' y='55'>Quadrado</text>
+        </svg>
+          <svg   x='0' y='0' class='main figurinhas '>
+            <rect class='shape figurinhas' tipo="quadrado"  style='fill:green;' x='10' y='10' />
+
+        </svg>
+          <svg   x='0' y='0' class='main figurinhas quadrado'>
+            <rect class='shape figurinhas' tipo="quadrado"  style='fill:red;' x='10' y='10'  />
+
+        </svg>
+        <svg  x='0' y='0' class='main figurinhas'>
+            <rect class='shape figurinhas' tipo="quadrado"  style='fill:blue;' x='10' y='10'  />
+
+        </svg>
+
+      </div>
+ 		<div id="board" >
+
+
  		</div>
- 		<div id="menu" style="border: 1px solid #d3d3d3;">
- 		   
-			<svg  x='0' y='0' class='main figurinhas'>
-			    <rect class='shape figurinhas' tipo="quadrado"  style='fill:yellow;' x='10' y='10' />
-			    <text font-size='30' class='text1'  style='fill:#333;' x='55' y='55'>Quadrado</text>
-			</svg>
-				<svg   x='0' y='0' class='main figurinhas '>
-			    <rect class='shape figurinhas' tipo="quadrado"  style='fill:green;' x='10' y='10' />
-			    
-			</svg>
-				<svg   x='0' y='0' class='main figurinhas quadrado'>
-			    <rect class='shape figurinhas' tipo="quadrado"  style='fill:red;' x='10' y='10'  />
-			    
-			</svg>
-			<svg  x='0' y='0' class='main figurinhas'>
-			    <rect class='shape figurinhas' tipo="quadrado"  style='fill:blue;' x='10' y='10'  />
-			    
-			</svg>
-		
- 		</div>
-  		</div>
-		<div data-role="footer" data-position="fixed"></div>
+
+  </div>
 	</div>
-	<script>
-	    
-	  
-	</script>
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery-mobile-bower/js/jquery.mobile-1.4.5.min.js"></script>
+
+
+  <script src="js/App.Util.js"></script>
+
+  <script src="js/App.Figura.Atual.js"></script>
+  <script src="js/App.init.js"></script>
+  <script src="js/App.Modelos.Figuras.js"></script>
+  <script src="js/App.js"></script>
 </body>
 </html>

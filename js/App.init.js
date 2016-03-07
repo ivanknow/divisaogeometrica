@@ -1,14 +1,19 @@
 /**
  * Object with values that is used for all aplication
- * 
+ *
  * Dependences: Jquery, JqueryMobile
  */
+
 var App = App || {};
 App.init = function() {// init
+//salva margin do quadro
+
+
 		$("#board").on("mouseover", ".vertice", function(evt) {
+
 			var hasClass = $(this).attr("class");
 
-			if (hasClass != "primeiro vertice" && hasClass != "proibida vertice" && App.mousePressed) { 
+			if (hasClass != "primeiro vertice" && hasClass != "proibida vertice" && App.const.mousePressed) {
 				// se nao for o primeiro ou proibida ele termina
 
 				var id1 = $(".primeiro").attr("id");
@@ -16,13 +21,14 @@ App.init = function() {// init
 
 				var p = $(this);
 				var position = p.position();
-
-				$("#linemoved").attr("x2", position.left - 8);
-				$("#linemoved").attr("y2", position.top - 52);
+				var topMargin = $(".figurasvg").offset().top;
+				var leftMargin = $(".figurasvg").offset().left;
+				$("#linemoved").attr("x2", position.left - topMargin - App.const.margin);
+				$("#linemoved").attr("y2", position.top - leftMargin - App.const.margin);
 
 				$("#linemoved").removeAttr("id");// remove a propriedade
 				// de se mover
-				App.mousePressed = false;//
+				App.const.mousePressed = false;//
 
 				// TODO adiciona nova aresta a figura
 				//App.addNovaAresta();
@@ -51,19 +57,19 @@ App.init = function() {// init
 				".vertice",
 				function(evt) {
 
-					App.mousePressed = true;
+					App.const.mousePressed = true;
 
 					$(this).attr("class", "primeiro vertice");
-					
+
 					var vid = $(this).attr("id");
-					
+
 					var priibidas = getProibidas(vid,App.figuraAtual);
 					for(var i=0;i<priibidas.length;i++){
 						$("#"+priibidas[i]).attr("class", "proibida vertice");
 					}
 
 					var p = $(this);
-					
+
 					var newLine = geraLinha($(this).attr("cx"),
 							$(this).attr("cy"), $(this).attr("cx"),
 							$(this).attr("cy"));
@@ -79,10 +85,13 @@ App.init = function() {// init
 
 					// console.log(App.mousePressed);
 
-					if (App.mousePressed === true) {
+					if (App.const.mousePressed === true) {
+						var topMargin =  $(".figurasvg").offset().top;
+						var leftMargin = $(".figurasvg").offset().left;
 
-						$("#linemoved").attr("x2", evt.pageX - 8).attr("y2",
-								evt.pageY - 52);
+						$("#linemoved")
+						.attr("x2", evt.pageX - leftMargin - App.const.margin)
+						.attr("y2",evt.pageY - topMargin - App.const.margin);
 					}
 
 				});
@@ -92,7 +101,7 @@ App.init = function() {// init
 		});
 
 		$("#board").on("mouseup", ".main", function(evt) {
-			App.mousePressed = false;
+			App.const.mousePressed = false;
 			$(".primeiro").attr("class", "vertice");
 			$(".proibida").attr("class", "vertice");
 			$("#linemoved").remove();
@@ -101,7 +110,7 @@ App.init = function() {// init
 		$(".shape").click(function(evt) {
 			var item = null;
 			var tipo = $(this).attr("tipo");
-			
+
 			App.figuraAtual.style = $(this).attr("style");
 			if (tipo == "quadrado") {
 				App.figuraAtual.setVertices(clone(App.Figuras.quadrado.vertices));
@@ -118,8 +127,8 @@ App.init = function() {// init
 
 
 	};
-	
-	
+
+
 
 	$(document).on("pagebeforecreate", function(event) {
 		App.init();
