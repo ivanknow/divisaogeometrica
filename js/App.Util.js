@@ -56,6 +56,17 @@ function geraArestas(figura) {
 	return retorno;
 }
 
+function removeAresta(v1,v2,figura) {
+	for(var i = 0;i<figura.arestas.length;i++){
+		if(figura.arestas[i].vi === v1 && figura.arestas[i].vf === v2 ){
+			array.splice(i, 1);
+		}
+		if(figura.arestas[i].vf === v1 && figura.arestas[i].vi === v2 ){
+			array.splice(i, 1);
+		}
+	}
+}
+
 function getPontoMedio(viid, vfid, figura) {
 	var vertice1 = getVerticeById(viid, figura);
 	var vertice2 = getVerticeById(vfid, figura);
@@ -130,7 +141,7 @@ function getProibidas(v, figura) {
 }
 
 function getCaminho(vi, vf, figura, caminho) {
-	
+
 	console.log("passou"+vi+"-"+vf);
 	console.log(caminho);
 	if(caminho === null){
@@ -139,14 +150,14 @@ function getCaminho(vi, vf, figura, caminho) {
 	if(vi === vf){
 		return null;
 	}
-	
+
 	var aresta = null;
 	for (var i = 0; i < figura.arestas.length; i++) {
 		if(vi === figura.arestas[i].vi){
 			aresta = figura.arestas[i];
 		}
 	}
-	
+
 	if(caminho.indexOf(vi)!= -1){
 		//significa que tem um vi, ou seja loop
 		caminho.push(vi);
@@ -157,17 +168,17 @@ function getCaminho(vi, vf, figura, caminho) {
 	if(aresta === null){
 		return null;
 	}
-	
+
 	if(vf === aresta.vf){
 		caminho.push(vf);
-		
+
 	}else{
 		var vx = aresta.vf;
 		getCaminho(vx, vf, figura, caminho);
 	}
-	
+
 	return caminho;
-	
+
 
 }
 
@@ -189,9 +200,9 @@ function dividirFigura(vi, vf, figura) {
 		//usa a 1
 		adjEscolida = adj[1];
 	}
-	
-	
-	
+
+
+
 
 }
 

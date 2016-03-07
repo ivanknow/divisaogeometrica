@@ -12,13 +12,17 @@
 
 <style>
 .primeiro{
+fill:green;
+stroke:#33CC00;
+}
 
-stroke:blue;
+.vertice{
+stroke:#33CC00;
 }
 
 .proibida{
-
 stroke:red;
+fill:darkred;
 }
 
 .figurinhas {
@@ -54,18 +58,18 @@ stroke:red;
 
         <svg  x='0' y='0' class='main figurinhas'>
             <rect class='shape figurinhas' tipo="quadrado"  style='fill:yellow;' x='10' y='10' />
-            <text font-size='30' class='text1'  style='fill:#333;' x='55' y='55'>Quadrado</text>
+
         </svg>
           <svg   x='0' y='0' class='main figurinhas '>
-            <rect class='shape figurinhas' tipo="quadrado"  style='fill:green;' x='10' y='10' />
+            <rect class='shape figurinhas' tipo="quadrado"  style='fill:lightblue;' x='10' y='10' />
 
         </svg>
           <svg   x='0' y='0' class='main figurinhas quadrado'>
-            <rect class='shape figurinhas' tipo="quadrado"  style='fill:red;' x='10' y='10'  />
+            <rect class='shape figurinhas' tipo="quadrado"  style='fill:orange;' x='10' y='10'  />
 
         </svg>
         <svg  x='0' y='0' class='main figurinhas'>
-            <rect class='shape figurinhas' tipo="quadrado"  style='fill:blue;' x='10' y='10'  />
+            <rect class='shape figurinhas' tipo="quadrado"  style='fill:#FF0066;' x='10' y='10'  />
 
         </svg>
 
@@ -82,7 +86,7 @@ stroke:red;
 
 
   <script src="js/App.Util.js"></script>
-
+  <script src="js/App.events.js"></script>
   <script src="js/App.Figura.Atual.js"></script>
   <script src="js/App.init.js"></script>
   <script src="js/App.Modelos.Figuras.js"></script>

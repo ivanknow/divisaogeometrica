@@ -7,7 +7,7 @@
 var App = App || {};
 
 App.events =  {
-	onClickVertice:function(evt){
+	onClickVerticeSelectFirst:function(evt){
 		App.const.mousePressed = true;
 
 		$(this).attr("class", "primeiro vertice");
@@ -25,10 +25,11 @@ App.events =  {
 				$(this).attr("cy"), $(this).attr("cx"),
 				$(this).attr("cy"));
 		newLine.setAttribute('id', 'linemoved');
+		newLine.setAttribute("stroke-dasharray","10,10");
 
 		$("#board svg").append(newLine);
 	},
-	onMouseOverVertice:function(evt){
+	onMouseOverVerticeFindSecond:function(evt){
 		var hasClass = $(this).attr("class");
 
 		if (hasClass != "primeiro vertice" && hasClass != "proibida vertice" && App.const.mousePressed) {
@@ -54,9 +55,15 @@ App.events =  {
 			// TODO inserir ponto medio
 			var medio = getPontoMedio(id1, id2, App.figuraAtual);
 			console.log(JSON.stringify(medio));
+			removeAresta(id1,id2,App.figuraAtual);
 			App.figuraAtual.vertices.push(medio);
+
 			App.figuraAtual.arestas.push({
 				vi : id1,
+				vf : medio.id,
+				d : 0
+			},{
+				vi : medio.id,
 				vf : id2,
 				d : 0
 			});
@@ -69,7 +76,7 @@ App.events =  {
 		}
 
 	},
-	onClickShape:function(evt){
+	onClickShapeSelectShape:function(evt){
 		var item = null;
 		var tipo = $(this).attr("tipo");
 
