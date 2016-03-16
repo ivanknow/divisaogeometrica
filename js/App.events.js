@@ -47,17 +47,15 @@ App.events =  {
 
 			$("#linemoved").removeAttr("id");// remove a propriedade
 			// de se mover
-			App.const.mousePressed = false;//
+			App.const.mousePressed = false;
 
-			// TODO adiciona nova aresta a figura
-			//App.addNovaAresta();
 
-			// TODO inserir ponto medio
+			//inserir ponto medio
 			var medio = getPontoMedio(id1, id2, App.figuraAtual);
-			console.log(JSON.stringify(medio));
-			removeAresta(id1,id2,App.figuraAtual);
+			//console.log(JSON.stringify(medio));
+		//eu acho q isso é desnecessário, pois nunca vai haver aresta entre pessoas que podem se ligar	removeAresta(id1,id2,App.figuraAtual);
 			App.figuraAtual.vertices.push(medio);
-
+			//TODO inserir novos no lugar certo
 			App.figuraAtual.arestas.push({
 				vi : id1,
 				vf : medio.id,
