@@ -51,22 +51,7 @@ App.events =  {
 
 
 			//inserir ponto medio
-			var medio = getPontoMedio(id1, id2, App.figuraAtual);
-			//console.log(JSON.stringify(medio));
-		//eu acho q isso é desnecessário, pois nunca vai haver aresta entre pessoas que podem se ligar	removeAresta(id1,id2,App.figuraAtual);
-			App.figuraAtual.vertices.push(medio);
-			//TODO inserir novos no lugar certo
-			App.figuraAtual.arestas.push({
-				vi : id1,
-				vf : medio.id,
-				d : 0
-			},{
-				vi : medio.id,
-				vf : id2,
-				d : 0
-			});
-
-			removeVerticesOutOfThePath(medio.id,id1,App.figuraAtual);
+			inserePontoMedio(id1,id2,App.figuraAtual);
 
 			var item = App.figuraAtual.updateSVG();
 
@@ -81,9 +66,22 @@ App.events =  {
 		var tipo = $(this).attr("tipo");
 
 		App.figuraAtual.style = $(this).attr("style");
+		App.figuraAtual.tipo = tipo;
 		if (tipo == "quadrado") {
 			App.figuraAtual.setVertices(clone(App.Figuras.quadrado.vertices));
 			App.figuraAtual.setArestas(clone(App.Figuras.quadrado.arestas));
+		}
+		if (tipo == "quadrado2") {
+			App.figuraAtual.setVertices(clone(App.Figuras.quadrado2.vertices));
+			App.figuraAtual.setArestas(clone(App.Figuras.quadrado2.arestas));
+		}
+		if (tipo == "triangulo") {
+			App.figuraAtual.setVertices(clone(App.Figuras.triangulo.vertices));
+			App.figuraAtual.setArestas(clone(App.Figuras.triangulo.arestas));
+		}
+		if (tipo == "pentagono") {
+			App.figuraAtual.setVertices(clone(App.Figuras.pentagono.vertices));
+			App.figuraAtual.setArestas(clone(App.Figuras.pentagono.arestas));
 		}
 
 		//var elemento = $(this);

@@ -162,48 +162,6 @@ function getProibidas(v, figura) {
 
 }
 
-function getCaminho(vi, vf, figura, caminho) {
-
-	console.log("passou"+vi+"-"+vf);
-	console.log(caminho);
-	if(caminho === null){
-		caminho = new Array();
-	}
-	if(vi === vf){
-		return null;
-	}
-
-	var aresta = null;
-	for (var i = 0; i < figura.arestas.length; i++) {
-		if(vi === figura.arestas[i].vi){
-			aresta = figura.arestas[i];
-		}
-	}
-
-	if(caminho.indexOf(vi)!= -1){
-		//significa que tem um vi, ou seja loop
-		caminho.push(vi);
-		return null;
-	}
-	caminho.push(vi);
-	console.log(caminho);
-	if(aresta === null){
-		return null;
-	}
-
-	if(vf === aresta.vf){
-		caminho.push(vf);
-
-	}else{
-		var vx = aresta.vf;
-		getCaminho(vx, vf, figura, caminho);
-	}
-
-	return caminho;
-
-
-}
-
 function removeVerticesOutOfThePath(vi, vf, figura){
 	var newPath = getPath(vi, vf, figura);
 	for(var i = 0;i<figura.vertices.length;i++){
@@ -306,4 +264,40 @@ function clone(obj) {
 	}
 
 	throw new Error("Unable to copy obj! Its type isn't supported.");
+}
+
+function inserePontoMedio(id1,id2,figura){
+
+	if(getVerticeIndex(id1,figura)<getVerticeIndex(id2,figura)){
+		var temp = id1;
+		id1 = id2;
+		id2 = temp;
+	}
+
+	var medio = getPontoMedio(id1, id2,figura);
+
+	//figura.vertices.push(medio);
+	var nextIndex = getVerticeIndex(id1,figura);
+	figura.vertices.splice(nextIndex+1,0,medio);
+	figura.arestas.push({
+		vi : id1,
+		vf : medio.id,
+		d : 0
+	},{
+		vi : medio.id,
+		vf : id2,
+		d : 0
+	});
+
+removeVerticesOutOfThePath(medio.id,id1,figura);
+}
+
+function getVerticeIndex(verticeId,figura){
+
+	for(var i=0;i<figura.vertices.length;i++){
+		if(figura.vertices[i].id===verticeId){
+			break;
+		}
+	}
+	return i;
 }
