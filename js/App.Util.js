@@ -268,7 +268,7 @@ function clone(obj) {
 
 function inserePontoMedio(id1,id2,figura){
 
-	if(getVerticeIndex(id1,figura)<getVerticeIndex(id2,figura)){
+	if(getVerticeIndex(id1,figura)>getVerticeIndex(id2,figura)){
 		var temp = id1;
 		id1 = id2;
 		id2 = temp;
