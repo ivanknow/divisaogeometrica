@@ -38,13 +38,6 @@ function geraArestas(figura) {
 
 		vf = getVerticeById(figura.arestas[i].vf, figura);
 
-		/*
-		 * console.log("de " + figura.arestas[i].vi + " para " +
-		 * figura.arestas[i].vf + "com " + figura.arestas[i].d); console.log("de (" +
-		 * vi.x + "," + vi.y + ") para (" + vf.x + "," + vf.y + ")com " +
-		 * figura.arestas[i].d);
-		 */
-
 		var newLine = geraLinha(vi.x, vi.y, vf.x, vf.y);
 		var tmp = document.createElement("div");
 		tmp.appendChild(newLine);
@@ -65,7 +58,7 @@ function removeAresta(v1,v2,figura) {
 }
 
 function removeVertice(v,figura) {
-	for(var i = 0;i<figura.vertices.length;i++){
+	for(var i = figura.vertices.length-1;i>=0;i--){
 			if(figura.vertices[i].id === v){
 				figura.vertices.splice(i, 1);
 				console.log("remove "+ v);
@@ -108,7 +101,7 @@ function getPontoMedio(viid, vfid, figura) {
 function geraVertice(vertice) {
 	var content = "<circle id='" + vertice.id + "' cx='" + vertice.x + "' cy='"
 			+ vertice.y
-			+ "' r='13' fill='black' class='vertice' stroke-width='10'/>";
+			+ "' r='20' fill='black' class='vertice' stroke-width='10'/>";
 
 	return content;
 }
@@ -164,7 +157,7 @@ function getProibidas(v, figura) {
 
 function removeVerticesOutOfThePath(vi, vf, figura){
 	var newPath = getPath(vi, vf, figura);
-	for(var i = 0;i<figura.vertices.length;i++){
+	for(var i = figura.vertices.length-1;i>=0;i--){
 			if(newPath.indexOf(figura.vertices[i].id)===-1 ){
 				console.log(figura.vertices[i].id);
 				removeVertice(figura.vertices[i].id,figura);

@@ -5,10 +5,8 @@
  */
 
 var App = App || {};
-App.init = function() {// init
-//salva margin do quadro
-
-
+App.init = function() {
+		//mouse
 		$("#board").on("mouseover", ".vertice", App.events.onMouseOverVerticeFindSecond);
 
 		$("#board").on("click",".vertice",App.events.onClickVerticeSelectFirst);
@@ -20,12 +18,11 @@ App.init = function() {// init
 		$("#board").on("mouseup", ".main", App.events.onMouseUpRemovePrimeiro);
 
 		$(".shape").click( App.events.onClickShapeSelectShape);
-
+		//touch
 
 	};
 
 
-
-	$(document).on("pagebeforecreate", function(event) {
-		App.init();
-	});
+$(function(){
+	App.init();
+});
