@@ -60,26 +60,18 @@ function removeAresta(v1,v2,figura) {
 function removeVertice(v,figura) {
 	for(var i = figura.vertices.length-1;i>=0;i--){
 			if(figura.vertices[i].id === v){
+
+				addPontoResto(figura,figura.vertices[i]);
+
 				figura.vertices.splice(i, 1);
-				console.log("remove "+ v);
 			}
 		}
-		var leng = figura.arestas.length;
-		var ids = [];
-	for(var j = 0;j<leng;j++){
-		console.log(""+j+"-"+leng);
-		if(figura.arestas[j].vf === v || figura.arestas[j].vi === v ){
-			ids.push(j);
+
+	for(var j = figura.arestas.length -1 ;j>=0;j--){
+	if(figura.arestas[j].vf === v || figura.arestas[j].vi === v ){
+		figura.arestas.splice(j, 1);
 		}
 	}
-	console.log(ids);
-	ids.sort(function(a, b){return b-a});
-	console.log(ids);
-for(var k = 0;k<ids.length;k++){
-	console.log("remove aresta"+ids[k]);
-	figura.arestas.splice(ids[k], 1);
-}
-
 }
 
 function getPontoMedio(viid, vfid, figura) {
@@ -127,7 +119,7 @@ function isAdjacente(viid, vfid, figura) {
 
 function getNosAdjacentes(v, figura) {
 	var vertice = getVerticeById(v, figura);
-	console.log(vertice);
+
 	var adjacentes = new Array();
 	for (var i = 0; i < figura.arestas.length; i++) {
 
@@ -159,7 +151,7 @@ function removeVerticesOutOfThePath(vi, vf, figura){
 	var newPath = getPath(vi, vf, figura);
 	for(var i = figura.vertices.length-1;i>=0;i--){
 			if(newPath.indexOf(figura.vertices[i].id)===-1 ){
-				console.log(figura.vertices[i].id);
+			//	console.log(figura.vertices[i].id);
 				removeVertice(figura.vertices[i].id,figura);
 			}
 		}
@@ -191,35 +183,12 @@ function getPath(vi, vf, figura) {
 
 }
 
-function dividirFigura(vi, vf, figura) {
-	// pega os adjacentes de vi
-	var adj = getNosAdjacentes(vi, figura);
-	// pega um caminho de vi ate vf
-	var caminho = getCaminho(vi, vf, figura, null);
-	if(caminho == null){
-		return null;
-	}
-	// o caminho que tiver
-	//sempre vao sr so duas adjacencias pq eu vou dividir
-	var adjEscolida = "";
-	if(caminho.indexOf(adj[0]) != -1){
-		//usa a 0
-		adjEscolida = adj[0];
-	}else{
-		//usa a 1
-		adjEscolida = adj[1];
-	}
-
-
-
-
-}
 
 function distanciaDoisPontos(v1, v2, figura) {
 	var vi = getVerticeById(v1, figura);
-	console.log(vi);
+//	console.log(vi);
 	var vf = getVerticeById(v2, figura);
-	console.log(vf);
+	//console.log(vf);
 	return Math.sqrt(Math.pow(vf.x - vi.x, 2) + Math.pow(vf.y - vi.y, 2));
 }
 
@@ -267,6 +236,9 @@ function inserePontoMedio(id1,id2,figura){
 		id2 = temp;
 	}
 
+	addPontoResto(figura,getVerticeById(id1,figura));
+	addPontoResto(figura,getVerticeById(id2,figura));
+
 	var medio = getPontoMedio(id1, id2,figura);
 
 	//figura.vertices.push(medio);
@@ -283,6 +255,7 @@ function inserePontoMedio(id1,id2,figura){
 	});
 
 removeVerticesOutOfThePath(medio.id,id1,figura);
+figura.restoCount++;
 }
 
 function getVerticeIndex(verticeId,figura){
@@ -293,4 +266,11 @@ function getVerticeIndex(verticeId,figura){
 		}
 	}
 	return i;
+}
+
+function addPontoResto(figura,vertice){
+	//console.log(JSON.stringify(figura));
+	var ponto = {"x":vertice.x,"y":vertice.y};
+	figura.restos[figura.restoCount] = figura.restos[figura.restoCount]||[];
+	figura.restos[figura.restoCount].push(ponto);
 }

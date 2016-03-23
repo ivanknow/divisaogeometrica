@@ -25,7 +25,7 @@ App.events =  {
 				$(this).attr("cy"), $(this).attr("cx"),
 				$(this).attr("cy"));
 		newLine.setAttribute('id', 'linemoved');
-		newLine.setAttribute("stroke-dasharray","10,10");
+		newLine.setAttribute("stroke-dasharray","20,20");
 
 		$("#board svg").append(newLine);
 	},
@@ -67,6 +67,8 @@ App.events =  {
 
 		App.figuraAtual.style = $(this).attr("style");
 		App.figuraAtual.tipo = tipo;
+		App.figuraAtual.restos = [];
+		App.figuraAtual.restoCount = 0;
 		if (tipo == "quadrado") {
 			App.figuraAtual.setVertices(clone(App.Figuras.quadrado.vertices));
 			App.figuraAtual.setArestas(clone(App.Figuras.quadrado.arestas));
