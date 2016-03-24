@@ -1,6 +1,11 @@
 var App = App || {};
 App.Figuras = {
 	triangulo : {
+		color:{
+			r:255,
+			g:255,
+			b:0
+		},
 		vertices : [ {
 			id : "v0",
 			x : 0,
@@ -31,6 +36,11 @@ App.Figuras = {
 
 	},
 	quadrado : {
+		color:{
+			r:135,
+			g:206,
+			b:250
+		},
 		vertices : [ {
 			id : "v0",
 			x : 0,
@@ -69,6 +79,11 @@ App.Figuras = {
 
 	},
 	quadrado2 : {
+		color:{
+			r:255,
+			g:0,
+			b:102
+		},
 		vertices : [ {
 			id : "v0",
 			x : 200,
@@ -107,6 +122,11 @@ App.Figuras = {
 
 	},
 	pentagono : {
+		color:{
+			r:255,
+			g:165,
+			b:0
+		},
 		vertices : [ {
 			id : "v0",
 			x : 200,

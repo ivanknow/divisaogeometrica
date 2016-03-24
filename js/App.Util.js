@@ -274,3 +274,7 @@ function addPontoResto(figura,vertice){
 	figura.restos[figura.restoCount] = figura.restos[figura.restoCount]||[];
 	figura.restos[figura.restoCount].push(ponto);
 }
+
+function getColorCss(color) {
+return "fill:rgb("+color.r+","+color.g+","+color.b+")";
+}

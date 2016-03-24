@@ -64,7 +64,7 @@ App.events =  {
 	onClickShapeSelectShape:function(evt){
 		var item = null;
 		var tipo = $(this).attr("tipo");
-
+		App.figuraAtual.color = $(this).css("fill");
 		App.figuraAtual.style = $(this).attr("style");
 		App.figuraAtual.tipo = tipo;
 		App.figuraAtual.restos = [];
