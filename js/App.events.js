@@ -64,28 +64,10 @@ App.events =  {
 	onClickShapeSelectShape:function(evt){
 		var item = null;
 		var tipo = $(this).attr("tipo");
-		App.figuraAtual.color = $(this).css("fill");
-		App.figuraAtual.style = $(this).attr("style");
-		App.figuraAtual.tipo = tipo;
-		App.figuraAtual.restos = [];
-		App.figuraAtual.restoCount = 0;
-		if (tipo == "quadrado") {
-			App.figuraAtual.setVertices(clone(App.Figuras.quadrado.vertices));
-			App.figuraAtual.setArestas(clone(App.Figuras.quadrado.arestas));
-		}
-		if (tipo == "quadrado2") {
-			App.figuraAtual.setVertices(clone(App.Figuras.quadrado2.vertices));
-			App.figuraAtual.setArestas(clone(App.Figuras.quadrado2.arestas));
-		}
-		if (tipo == "triangulo") {
-			App.figuraAtual.setVertices(clone(App.Figuras.triangulo.vertices));
-			App.figuraAtual.setArestas(clone(App.Figuras.triangulo.arestas));
-		}
-		if (tipo == "pentagono") {
-			App.figuraAtual.setVertices(clone(App.Figuras.pentagono.vertices));
-			App.figuraAtual.setArestas(clone(App.Figuras.pentagono.arestas));
-		}
 
+		App.figuraAtual = Object.create(App.Figuras);
+		App.figuraAtual.init(tipo);
+		
 		//var elemento = $(this);
 		item = App.figuraAtual.getSVG();
 

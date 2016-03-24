@@ -275,6 +275,7 @@ function addPontoResto(figura,vertice){
 	figura.restos[figura.restoCount].push(ponto);
 }
 
-function getColorCss(color) {
-return "fill:rgb("+color.r+","+color.g+","+color.b+")";
+function getColorCss(color,time) {
+
+return "fill:rgb("+(color.r + time * 40)+","+(color.g + time * 40)+","+(color.b + time * 40)+");";
 }
