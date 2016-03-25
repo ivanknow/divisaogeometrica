@@ -92,6 +92,9 @@ break;
 			content += geraVertice(this.vertices[i]);
 		}
 
+		return content;
+	},
+	wrapSVGTag:function(content){
 		var item = "<svg x='0' y='0' class='main figurasvg'>" + content
 				+ "</svg>";
 		return item;
@@ -100,14 +103,19 @@ break;
 
 		var content = this.generatePolygon();
 
-		return this.generateArestasVertices(content);
+		content+=writeTextCentered(this.vertices,this.restos.length-1);
+		content+= this.generateArestasVertices(content);
+
+		return this.wrapSVGTag(content);
 	},
 
 	updateSVG : function() {
 		var content = this.generatePolygonResto();
 		content += this.generatePolygon();
+		content+= this.generateArestasVertices(content);
+		content+=writeTextCentered(this.vertices,this.restos.length-1);
 
-		return this.generateArestasVertices(content);
+		return this.wrapSVGTag(content);
 	},
 	generatePolygon:function(){
 		var points = "";
@@ -125,6 +133,7 @@ break;
 				points += ""+this.restos[i][j].x+","+this.restos[i][j].y+" ";
 			}
 			content+="<polygon points='"+points+"' style='"+getColorCss(this.color,i+1)+"stroke:black;stroke-width:10;' />";
+			content+=writeTextCentered(this.restos[i],i);
 			points = "";
 		}
 		//

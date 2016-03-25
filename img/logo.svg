@@ -1,0 +1,17 @@
+<svg x="0" y="0">
+  <polygon points="400,132 66,400 344,400 " style="fill:rgb(40,168,40);stroke:black;stroke-width:10;"></polygon>
+  <polygon points="233,266 0,132 66,400 " style="fill:rgb(80,208,80);stroke:black;stroke-width:10;"> </polygon>
+  <polygon points="400,132 116.5,199 233,266 " style="fill:rgb(120,248,120);stroke:black;stroke-width:10;"></polygon><polygon points="258.25,165.5 0,132 116.5,199 " style="fill:rgb(160,288,160);stroke:black;stroke-width:10;"></polygon><polygon points="400,132 0,132 129.125,148.75 258.25,165.5 " style="fill:rgb(200,328,200);stroke:black;stroke-width:10;"></polygon><polygon points="200,0 200,132 400,132 " style="fill:rgb(240,368,240);stroke:black;stroke-width:10;"></polygon><polygon points="200,0 200,66 200,132 0,132 " style="fill:rgb(240,368,240);"></polygon>
+
+  <line class="line" x1="0" y1="132" x2="200" y2="0"></line>
+  <line class="line" x1="200" y1="132" x2="0" y2="132"></line>
+  <line class="line" x1="200" y1="0" x2="200" y2="66"></line>
+  <line class="line" x1="200" y1="66" x2="200" y2="132"></line>
+
+<circle id="v0" cx="200" cy="0" r="20" fill="black" class="vertice" stroke-width="10"></circle>
+<circle id="v0mv1mv4" cx="200" cy="66" r="20" fill="black" class="vertice" stroke-width="10"></circle>
+<circle id="v1mv4" cx="200" cy="132" r="20" fill="black" class="vertice" stroke-width="10"></circle>
+<circle id="v4" cx="0" cy="132" r="20" fill="black" class="vertice" stroke-width="10"></circle>
+
+
+</svg>

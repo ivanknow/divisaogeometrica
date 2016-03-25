@@ -4,7 +4,4 @@
  * Dependences: Jquery, JqueryMobile
  */
 var App = App || {};
-App.figuraAtual = {
-
-
-	};
+App.figuraAtual = {};

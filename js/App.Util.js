@@ -279,3 +279,22 @@ function getColorCss(color,time) {
 
 return "fill:rgb("+(color.r + time * 40)+","+(color.g + time * 40)+","+(color.b + time * 40)+");";
 }
+
+function getFiguraCenter(vertices){
+
+	var center = {x:0,y:0};
+	for(var i=0;i<vertices.length;i++){
+		center.x += vertices[i].x;
+		center.y += vertices[i].y;
+	}
+	center.x = center.x/vertices.length;
+	center.y = center.y/vertices.length;
+
+	return center;
+}
+
+function writeTextCentered(points,time){
+	var center = getFiguraCenter(points);
+	return "<text font-size='"+(50-(time*8))+"'  style='fill:#fff;' x='"+(center.x-33)+"' y='"+(center.y+20)+"'>"+1+"/"+Math.pow(2,time+1)+"</text>";
+
+}
