@@ -93,7 +93,7 @@ function getPontoMedio(viid, vfid, figura) {
 function geraVertice(vertice) {
 	var content = "<circle id='" + vertice.id + "' cx='" + vertice.x + "' cy='"
 			+ vertice.y
-			+ "' r='20' fill='black' class='vertice' stroke-width='10'/>";
+			+ "' r='30' fill='green' class='vertice alvo' stroke-width='"+App.const.stroke+"'/>";
 
 	return content;
 }
@@ -142,7 +142,7 @@ function getProibidas(v, figura) {
 
 	var proibidas = new Array();
 	proibidas = (getNosAdjacentes(v, figura));
-
+	//TODO add colineares
 	return proibidas;
 
 }
@@ -281,8 +281,8 @@ var colors = [
 	{r:139,g:0,b:139},
 	{r:255,g:69,b:0},
 	{r:0,g:255,b:127},
-	{r:50,g:205,b:50},
 	{r:255,g:0,b:0},
+	{r:50,g:205,b:50},
 	{r:139,g:0,b:0}
 ];
 
@@ -306,6 +306,6 @@ function getFiguraCenter(vertices){
 
 function writeTextCentered(points,time){
 	var center = getFiguraCenter(points);
-	return "<text font-size='"+(50-(time*8))+"'  style='fill:#fff;' x='"+(center.x-33)+"' y='"+(center.y+20)+"'>"+1+"/"+Math.pow(2,time+1)+"</text>";
+	return "<text class='noselect' font-size='"+(50-(time*8))+"'  style='fill:#000;' x='"+(center.x-33)+"' y='"+(center.y+20)+"'>"+1+"/"+Math.pow(2,time+1)+"</text>";
 
 }

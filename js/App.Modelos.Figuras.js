@@ -16,7 +16,7 @@ App.Figuras = {
 		this.color = {r:255,g:128,b:0};
 		this.vertices = [
 			{id:"v0",x:0,y:400},
-		 	{id:"v1",x:200,y : 0},
+		 	{id:"v1",x:200,y : 200},
 			{id : "v2",	x : 400,y : 400},
 			{id : "v3",	x : 200,y : 400}
 		];
@@ -141,7 +141,7 @@ break;
 			for (var j = 0; j < this.restos[i].length; j++) {
 				points += ""+this.restos[i][j].x+","+this.restos[i][j].y+" ";
 			}
-			content+="<polygon points='"+points+"' style='"+getColorCss(i+1)+"stroke:black;stroke-width:10;' />";
+			content+="<polygon points='"+points+"' style='"+getColorCss(i+1)+"stroke:black;stroke-width:"+App.const.stroke+";' />";
 			content+=writeTextCentered(this.restos[i],i);
 			points = "";
 		}

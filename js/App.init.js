@@ -7,18 +7,29 @@
 var App = App || {};
 App.init = function() {
 		//mouse
-		$("#board").on("mouseover", ".vertice", App.events.onMouseOverVerticeFindSecond);
+		$("#board").on("vmouseover", ".vertice", App.events.onMouseOverVerticeFindSecond);
 
-		$("#board").on("click",".vertice",App.events.onClickVerticeSelectFirst);
+/*		$(".shape").on("swipe",function(){
+    $("#titulo").text("Swipe detected!");
+	});*/
 
-		$("#board").on("mousemove",	".main", App.events.onMouseMoveOnMainSVG);
+	/*	$(".vertice").on("swipe",function(){
+		$("#titulo").text("Swipe detected!");
+	});*/
+		//$("#board").on("click",".vertice",App.events.onClickVerticeSelectFirst);
+		$("#board").on("tap",".vertice",App.events.onClickVerticeSelectFirst);
 
-		$("#board").on("mousedown", ".main", function(evt) {});
+		$("#board").on("vmousemove",	".main", App.events.onMouseMoveOnMainSVG);
 
-		$("#board").on("mouseup", ".main", App.events.onMouseUpRemovePrimeiro);
+	//	$("#board").on("mousedown", ".main", function(evt) {});
 
-		$(".shape").click( App.events.onClickShapeSelectShape);
+		$("#board").on("vmouseup", ".main", App.events.onMouseUpRemovePrimeiro);
+
+		//$(".shape").click( App.events.onClickShapeSelectShape);*/
 		//touch
+		$(".shape").on("tap",App.events.onClickShapeSelectShape);
+
+
 
 	};
 

@@ -30,8 +30,9 @@ App.events =  {
 		$("#board svg").append(newLine);
 	},
 	onMouseOverVerticeFindSecond:function(evt){
-		var hasClass = $(this).attr("class");
 
+		var hasClass = $(this).attr("class");
+try{
 		if (hasClass != "primeiro vertice" && hasClass != "proibida vertice" && App.const.mousePressed) {
 			// se nao for o primeiro ou proibida ele termina
 
@@ -59,6 +60,10 @@ App.events =  {
 			$(".primeiro").attr("class", "vertice");
 			$(".proibida").attr("class", "vertice");
 		}
+	}catch (e) {
+   // statements to handle any unspecified exceptions
+   alert(e); // pass exception object to error handler
+}
 
 	},
 	onClickShapeSelectShape:function(evt){
@@ -67,7 +72,7 @@ App.events =  {
 
 		App.figuraAtual = Object.create(App.Figuras);
 		App.figuraAtual.init(tipo);
-		
+
 		//var elemento = $(this);
 		item = App.figuraAtual.getSVG();
 
@@ -86,7 +91,6 @@ App.events =  {
 		if (App.const.mousePressed === true) {
 			var topMargin =  $(".figurasvg").offset().top;
 			var leftMargin = $(".figurasvg").offset().left;
-
 			$("#linemoved")
 			.attr("x2", evt.pageX - leftMargin - App.const.margin)
 			.attr("y2",evt.pageY - topMargin - App.const.margin);

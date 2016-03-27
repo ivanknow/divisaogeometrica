@@ -10,5 +10,6 @@ App.const = {
 	viid : "",
 	vfid : "",
 	verticePressedX : 0,
-	verticePressedY : 0
+	verticePressedY : 0,
+	stroke : 1,
 };
