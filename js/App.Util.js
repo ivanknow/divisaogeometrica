@@ -275,9 +275,20 @@ function addPontoResto(figura,vertice){
 	figura.restos[figura.restoCount].push(ponto);
 }
 
-function getColorCss(color,time) {
+function getColorCss(time) {
+var colors = [
+	{r:25,g:25,b:112},
+	{r:139,g:0,b:139},
+	{r:255,g:69,b:0},
+	{r:0,g:255,b:127},
+	{r:50,g:205,b:50},
+	{r:255,g:0,b:0},
+	{r:139,g:0,b:0}
+];
 
-return "fill:rgb("+(color.r + time * 40)+","+(color.g + time * 40)+","+(color.b + time * 40)+");";
+var color = colors[time%7];
+
+return "fill:rgb("+(color.r)+","+(color.g)+","+(color.b)+");";
 }
 
 function getFiguraCenter(vertices){

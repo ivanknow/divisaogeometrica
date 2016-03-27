@@ -45,7 +45,7 @@ App.Figuras = {
 		];
 
 		break;
-		case "quadrado2":
+		case "losango":
 		this.color = {r:255,g:0,b:0		};
 		this.vertices = [
 			{id : "v0",x : 200,y : 0		},
@@ -61,21 +61,28 @@ App.Figuras = {
 			{vi : "v3",vf : "v0",d : 400		}
 			 ];
 break;
-		case "pentagono":
+		case "quadrado2":
 		this.color={r:0,g:128,b:0		},
-		this.vertices = [
-			{id : "v0",x : 200,y : 0		},
-			{id : "v1",x : 400,y : 132		},
-			{id : "v2",x : 344, y : 400		},
-			{id : "v3",x : 66,y : 400		},
-			{id : "v4",x : 0,y : 132	 }
+
+		this.vertices=[
+		{id : "v0",x : 0,y : 0},
+		{id : "v0m",x : 200,y : 0},
+		{id : "v1",x : 400,	y : 0},
+		{id : "v1m",x : 400,	y : 200},
+		{id : "v2",x : 400,y : 400},
+		{id : "v2m",x : 200,y : 400},
+		{id : "v3",x : 0,y : 400},
+		{id : "v3m",x : 0,y : 200}
 		];
 		this.arestas = [
-			{vi : "v0",vf : "v1",d : 400		},
-			{vi : "v1",vf : "v2",d : 400		},
-			{vi : "v2",vf : "v3",d : 400		},
-			{vi : "v3",vf : "v4",d : 400		},
-			{vi : "v4",vf : "v0",d : 400		}
+		{	vi : "v0",vf : "v0m",d : 0},
+		{	vi : "v0m",vf : "v1",d : 0},
+		{vi : "v1",vf : "v1m",d : 400},
+		{vi : "v1m",vf : "v2",d : 400},
+		{vi : "v2",vf : "v2m",d : 400},
+		{vi : "v2m",vf : "v3",d : 400},
+		{vi : "v3",vf : "v3m",d : 400},
+		{vi : "v3m",vf : "v0",d : 400}
 		];
 
 
@@ -125,7 +132,7 @@ break;
 		for (i = 0; i < this.vertices.length; i++) {
 			points += ""+this.vertices[i].x+","+this.vertices[i].y+" ";
 		}
-		return "<polygon points='"+points+"' style='"+getColorCss(this.color,this.restos.length)+"' />";
+		return "<polygon points='"+points+"' style='"+getColorCss(this.restos.length)+"' />";
 	},
 	generatePolygonResto:function(){
 		var points = "";
@@ -134,7 +141,7 @@ break;
 			for (var j = 0; j < this.restos[i].length; j++) {
 				points += ""+this.restos[i][j].x+","+this.restos[i][j].y+" ";
 			}
-			content+="<polygon points='"+points+"' style='"+getColorCss(this.color,i+1)+"stroke:black;stroke-width:10;' />";
+			content+="<polygon points='"+points+"' style='"+getColorCss(i+1)+"stroke:black;stroke-width:10;' />";
 			content+=writeTextCentered(this.restos[i],i);
 			points = "";
 		}

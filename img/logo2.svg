@@ -1,0 +1,12 @@
+<svg x="0" y="0" >
+  <polygon points="400,0 0,400 400,400 " style="fill:rgb(40,40,168);"></polygon>
+  <polygon points="0,0 200,200 400,0 " style="fill:rgb(80,80,208);"></polygon>
+  <polygon points="100,100 0,400 200,200 " style="fill:rgb(120,120,248);"></polygon>
+  <polygon points="0,0 50,250 100,100 " style="fill:rgb(160,160,288);"></polygon>
+  <polygon points="0,0 25,125 50,250 0,400 " style="fill:rgb(160,160,288);"></polygon>
+  <polygon points="400,0 0,400 400,400 " style="fill:rgb(40,40,168);"></polygon>
+  <polygon points="0,0 200,200 400,0 " style="fill:rgb(80,80,208);"></polygon>
+  <polygon points="100,100 0,400 200,200 " style="fill:rgb(120,120,248);"></polygon>
+  <polygon points="0,0 50,250 100,100 " style="fill:rgb(160,160,288);"></polygon>
+<polygon points="0,0 25,125 50,250 0,400 " style="fill:rgb(160,160,288);"></polygon>
+</svg>
