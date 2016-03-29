@@ -15,10 +15,10 @@ App.Figuras = {
 		case "triangulo":
 		this.color = {r:255,g:128,b:0};
 		this.vertices = [
-			{id:"v0",x:0,y:400},
-		 	{id:"v1",x:200,y : 200},
-			{id : "v2",	x : 400,y : 400},
-			{id : "v3",	x : 200,y : 400}
+			{id:"v0",x:0,y:200},
+		 	{id:"v1",x:200,y : 0},
+			{id : "v2",	x : 400,y : 200},
+			{id : "v3",	x : 200,y : 200}
 		];
 		this.arestas = 	[
 			{vi : "v0",	vf : "v1",	d : 400	},
@@ -104,7 +104,7 @@ break;
 		return content;
 	},
 	wrapSVGTag:function(content){
-		var item = "<svg x='0' y='0' class='main figurasvg'>" + content
+		var item = "<svg x='0' y='0' class='main figurasvg' viewBox='-100 20 1000 380'>" + content
 				+ "</svg>";
 		return item;
 	},

@@ -7,19 +7,11 @@
 var App = App || {};
 App.init = function() {
 		//mouse
-		$("#board").on("vmouseover", ".vertice", App.events.onMouseOverVerticeFindSecond);
+		$("#board").on("vmousedown", ".vertice", App.events.onMouseOverVerticeFindSecond);
 
-/*		$(".shape").on("swipe",function(){
-    $("#titulo").text("Swipe detected!");
-	});*/
+		$("#board").on("click",".vertice",App.events.onClickVerticeSelectFirst);
 
-	/*	$(".vertice").on("swipe",function(){
-		$("#titulo").text("Swipe detected!");
-	});*/
-		//$("#board").on("click",".vertice",App.events.onClickVerticeSelectFirst);
-		$("#board").on("tap",".vertice",App.events.onClickVerticeSelectFirst);
-
-		$("#board").on("vmousemove",	".main", App.events.onMouseMoveOnMainSVG);
+		//$("#board").on("vmousemove",	".main", App.events.onMouseMoveOnMainSVG);
 
 	//	$("#board").on("mousedown", ".main", function(evt) {});
 

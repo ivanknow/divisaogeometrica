@@ -93,7 +93,7 @@ function getPontoMedio(viid, vfid, figura) {
 function geraVertice(vertice) {
 	var content = "<circle id='" + vertice.id + "' cx='" + vertice.x + "' cy='"
 			+ vertice.y
-			+ "' r='30' fill='green' class='vertice alvo' stroke-width='"+App.const.stroke+"'/>";
+			+ "' r='40' fill='green' class='vertice alvo' stroke-width='"+App.const.stroke+"'/>";
 
 	return content;
 }

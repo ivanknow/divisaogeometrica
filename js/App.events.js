@@ -32,7 +32,6 @@ App.events =  {
 	onMouseOverVerticeFindSecond:function(evt){
 
 		var hasClass = $(this).attr("class");
-try{
 		if (hasClass != "primeiro vertice" && hasClass != "proibida vertice" && App.const.mousePressed) {
 			// se nao for o primeiro ou proibida ele termina
 
@@ -60,10 +59,6 @@ try{
 			$(".primeiro").attr("class", "vertice");
 			$(".proibida").attr("class", "vertice");
 		}
-	}catch (e) {
-   // statements to handle any unspecified exceptions
-   alert(e); // pass exception object to error handler
-}
 
 	},
 	onClickShapeSelectShape:function(evt){
