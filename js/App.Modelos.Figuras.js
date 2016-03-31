@@ -7,18 +7,29 @@ App.Figuras = {
 	style:"",
 	restos:[],
 	restoCount:0,
+	viewBox:{
+		minx:-100,
+		miny: 20,
+		width:1000,
+		height:380
+	},
 	init:function(type){
 		this.restos = [];
 		this.restoCount = 0;
 		this.type = type;
+		this.viewBox = {minx:-100,
+			miny: 20,
+			width:1000,
+			height:380
+		};
 		switch (type) {
 		case "triangulo":
 		this.color = {r:255,g:128,b:0};
 		this.vertices = [
-			{id:"v0",x:0,y:200},
-		 	{id:"v1",x:200,y : 0},
-			{id : "v2",	x : 400,y : 200},
-			{id : "v3",	x : 200,y : 200}
+			{id:"v0",x:0,y:300},
+		 	{id:"v1",x:300,y : 0},
+			{id : "v2",	x : 600,y : 300},
+			{id : "v3",	x : 300,y : 300}
 		];
 		this.arestas = 	[
 			{vi : "v0",	vf : "v1",	d : 400	},
@@ -48,10 +59,10 @@ App.Figuras = {
 		case "losango":
 		this.color = {r:255,g:0,b:0		};
 		this.vertices = [
-			{id : "v0",x : 200,y : 0		},
-			{id : "v1",x : 400,y : 200		},
-			{id : "v2",x : 200,y : 400		},
-			 {id : "v3",x : 0,y : 200		}
+			{id : "v0",x : 220,y : 0		},
+			{id : "v1",x : 440,y : 220		},
+			{id : "v2",x : 220,y : 440		},
+			 {id : "v3",x : 0,y : 220		}
 	];
 
 		this.arestas = [
@@ -104,7 +115,7 @@ break;
 		return content;
 	},
 	wrapSVGTag:function(content){
-		var item = "<svg x='0' y='0' class='main figurasvg' viewBox='-100 20 1000 380'>" + content
+		var item = "<svg x='0' y='0' id='figurasvg' class='main figurasvg' viewBox='"+this.viewBox.minx+" "+this.viewBox.miny+" "+this.viewBox.width+" "+this.viewBox.height+"'>" + content
 				+ "</svg>";
 		return item;
 	},
