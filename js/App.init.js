@@ -21,7 +21,8 @@ App.init = function() {
 		//touch
 		$(".shape").on("tap",App.events.onClickShapeSelectShape);
 
-
+		$("#zomm_mais").on("click",App.events.zoomMais);
+		$("#zomm_menos").on("click",App.events.zoomMenos);
 
 	};
 
