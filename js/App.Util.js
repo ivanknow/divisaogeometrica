@@ -240,23 +240,25 @@ function inserePontoMedio(id1,id2,figura){
 	addPontoResto(figura,getVerticeById(id2,figura));
 
 //TODO decidir onde será o corte
-	var medio = getPontoMedio(id1, id2,figura);
+	/*var medio = getPontoMedio(id1, id2,figura);
 
-	//figura.vertices.push(medio);
 	var nextIndex = getVerticeIndex(id1,figura);
+	//adiciona ponto medio no lugar certo
 	figura.vertices.splice(nextIndex+1,0,medio);
-	figura.arestas.push({
-		vi : id1,
-		vf : medio.id,
-		d : 0
-	},{
-		vi : medio.id,
-		vf : id2,
-		d : 0
-	});
+	//adiciona arestas
+	figura.arestas.push(
+		{	vi : id1,	vf : medio.id,	d : 0},
+		{	vi : medio.id,vf : id2,	d : 0	}
+	);*/
 
-removeVerticesOutOfThePath(medio.id,id1,figura);
+	figura.arestas.push(
+		{	vi : id1,	vf : id2,	d : 0}
+	);
+
+removeVerticesOutOfThePath(id2,id1,figura);
 figura.restoCount++;
+
+inserePontoMedioFiguraAtual(figura);
 }
 
 function getVerticeIndex(verticeId,figura){
@@ -325,4 +327,25 @@ function getMaiorAresta(figura){
 
 	return arestaRetorno;
 
+}
+
+function inserePontoMedioFiguraAtual(figura){
+//	if(figura.vertices.length%2==1){
+		//pega maior aresta
+		var maiorAresta = getMaiorAresta(figura);
+	//remove aresta temporária
+		//figura.arestas.pop();
+		removeAresta(maiorAresta.vi,maiorAresta.vf,figura);
+	//adiciona ponto médio na maior aresta
+	var medio = getPontoMedio(maiorAresta.vi,maiorAresta.vf ,figura);
+
+	var nextIndex = getVerticeIndex(maiorAresta.vi,figura);
+	//adiciona ponto medio no lugar certo
+	figura.vertices.splice(nextIndex+1,0,medio);
+	//adiciona arestas
+	figura.arestas.push(
+		{	vi : maiorAresta.vi,	vf : medio.id,	d : 0},
+		{	vi : medio.id,   vf : maiorAresta.vf,	d : 0	}
+	);
+//}
 }
