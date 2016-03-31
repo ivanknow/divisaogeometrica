@@ -239,6 +239,7 @@ function inserePontoMedio(id1,id2,figura){
 	addPontoResto(figura,getVerticeById(id1,figura));
 	addPontoResto(figura,getVerticeById(id2,figura));
 
+//TODO decidir onde será o corte
 	var medio = getPontoMedio(id1, id2,figura);
 
 	//figura.vertices.push(medio);
@@ -307,5 +308,21 @@ function getFiguraCenter(vertices){
 function writeTextCentered(points,time){
 	var center = getFiguraCenter(points);
 	return "<text class='noselect' font-size='"+(50-(time*8))+"'  style='fill:#000;' x='"+(center.x-33)+"' y='"+(center.y+20)+"'>"+1+"/"+Math.pow(2,time+1)+"</text>";
+
+}
+
+function getMaiorAresta(figura){
+	var arestaRetorno = {vi:"",vf:"",d : 0};
+	for(var i = 0;i<figura.arestas.length;i++){
+	figura.arestas[i].d = 	distanciaDoisPontos(figura.arestas[i].vi, figura.arestas[i].vf, figura);
+	console.log(figura.arestas[i].d);
+		if(figura.arestas[i].d>arestaRetorno.d){
+			arestaRetorno.d= figura.arestas[i].d;
+			arestaRetorno.vi= figura.arestas[i].vi;
+			arestaRetorno.vf= figura.arestas[i].vf;
+		}
+	}
+
+	return arestaRetorno;
 
 }
