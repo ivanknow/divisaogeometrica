@@ -19,15 +19,18 @@ App.events =  {
 			$("#"+priibidas[i]).attr("class", "proibida vertice");
 		}
 
-		var p = $(this);
 
-		var newLine = geraLinha($(this).attr("cx"),
-				$(this).attr("cy"), $(this).attr("cx"),
-				$(this).attr("cy"));
-		newLine.setAttribute('id', 'linemoved');
-		newLine.setAttribute("stroke-dasharray","20,20");
+			/*	var p = $(this);
 
-		$("#board svg").append(newLine);
+				var newLine = geraLinha($(this).attr("cx"),
+						$(this).attr("cy"), $(this).attr("cx"),
+						$(this).attr("cy"));
+				newLine.setAttribute('id', 'linemoved');
+				newLine.setAttribute("stroke-dasharray","20,20");
+
+				$("#board svg").append(newLine);*/
+
+
 	},
 	onMouseOverVerticeFindSecond:function(evt){
 
@@ -38,15 +41,14 @@ App.events =  {
 			var id1 = $(".primeiro").attr("id");
 			var id2 = $(this).attr("id");
 
-			var p = $(this);
+			/*var p = $(this);
 			var position = p.position();
 			var topMargin = $(".figurasvg").offset().top;
 			var leftMargin = $(".figurasvg").offset().left;
 			$("#linemoved").attr("x2", position.left - topMargin - App.const.margin);
 			$("#linemoved").attr("y2", position.top - leftMargin - App.const.margin);
 
-			$("#linemoved").removeAttr("id");// remove a propriedade
-			// de se mover
+			$("#linemoved").removeAttr("id");// remove a propriedade	// de se mover*/
 			App.const.mousePressed = false;
 
 
@@ -90,6 +92,19 @@ App.events =  {
 			.attr("x2", evt.pageX - leftMargin - App.const.margin)
 			.attr("y2",evt.pageY - topMargin - App.const.margin);
 		}
-	}
-
+	},
+	zoomMais:function(){
+		App.figuraAtual.viewBox?function(){
+			App.figuraAtual.viewBox.width -= 100;
+			var item = App.figuraAtual.updateSVG();
+			$("#board").html(item); }()
+			:console.log("figura n escolhida");
+	},
+	zoomMenos:function(){
+		App.figuraAtual.viewBox?function(){
+			App.figuraAtual.viewBox.width += 100;
+			var item = App.figuraAtual.updateSVG();
+			$("#board").html(item);
+		}():1;
+	},
 };
