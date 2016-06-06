@@ -280,8 +280,8 @@ function addPontoResto(figura,vertice){
 
 function getColorCss(time) {
 var colors = [
-	{r:25,g:25,b:112},
-	{r:139,g:0,b:139},
+	{r:0,g:191,b:255},
+	{r:255,g:165,b:0},
 	{r:255,g:69,b:0},
 	{r:99,g:184,b:255},
 	{r:255,g:255,b:0},

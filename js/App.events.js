@@ -18,8 +18,19 @@ App.events =  {
 		for(var i=0;i<priibidas.length;i++){
 			$("#"+priibidas[i]).attr("class", "proibida vertice");
 		}
+		
+		//legado
+				var p = $(this);
+ 
+ 				var newLine = geraLinha($(this).attr("cx"),
+ 						$(this).attr("cy"), $(this).attr("cx"),
+ 						$(this).attr("cy"));
+ 				newLine.setAttribute('id', 'linemoved');
+ 				newLine.setAttribute("stroke-dasharray","20,20");
+ 
+ 				$("#board svg").append(newLine);
 
-
+//legado
 
 	},
 	onMouseOverVerticeFindSecond:function(evt){
@@ -30,6 +41,18 @@ App.events =  {
 
 			var id1 = $(".primeiro").attr("id");
 			var id2 = $(this).attr("id");
+			
+			//legado
+			var p = $(this);
+  			var position = p.position();
+  			var topMargin = $(".figurasvg").offset().top;
+  			var leftMargin = $(".figurasvg").offset().left;
+  			$("#linemoved").attr("x2", position.left - topMargin - App.const.margin);
+  			$("#linemoved").attr("y2", position.top - leftMargin - App.const.margin);
+  			$("#linemoved").removeAttr("id");
+  			
+  			//legado
+			
 
 			App.const.mousePressed = false;
 
@@ -88,5 +111,13 @@ App.events =  {
 			var item = App.figuraAtual.updateSVG();
 			$("#board").html(item);
 		}():1;
+	},
+	
+	controlaVertice:function(valor){
+	if(valor == "true"){
+		$(".vertice").show();
+	}else{
+		$(".vertice").hide();
+	}
 	},
 };
