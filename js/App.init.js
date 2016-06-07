@@ -25,6 +25,14 @@ App.init = function() {
 			var valor = $(this).val(); 
 			App.events.controlaVertice(valor);
 		});
+		$("#board").on("swipe",function(event){
+    		alert("Swipe detected!"+JSON.stringify(event.swipestart.coords));
+		});  
+		$("#board").on("swipeupdown",function(event){
+    		alert("Swipe  U detected!");
+		});  
+		
+		
 
 	};
 
