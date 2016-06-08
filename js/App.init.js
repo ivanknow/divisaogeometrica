@@ -102,5 +102,5 @@ App.init = function() {
 
 
 $(function() {
-	App.init();
+	App.init(); //thiago dando trabalho
 });
