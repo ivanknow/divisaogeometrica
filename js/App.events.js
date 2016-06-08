@@ -128,5 +128,27 @@ App.events =  {
 			var coords = [];
 		}
 		$("#board").append("Swipe detected!"+JSON.stringify(coords));
-	}
+	},
+	
+	onSwiteVerticeSelectFirst:function(evt){
+ 				var newLine = geraLinha(0,0,evt.pageX ,evt.pageY);
+ 				newLine.setAttribute('id', 'linemoved');
+ 				newLine.setAttribute("stroke-dasharray","20,20");
+
+ 				$("#board svg").append(newLine);
+
+//legado
+
+	},
+	onSwipeOverVerticeFindSecond:function(evt){
+	
+  			var topMargin = $(".figurasvg").offset().top;
+  			var leftMargin = $(".figurasvg").offset().left;
+  			$("#linemoved").attr("x2", evt.pageX);
+  			$("#linemoved").attr("y2", evt.pageY);
+  			
+
+		}
+
+	,
 };

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript">
+
+var app = {
+        heigth:"500px",
+        width:"500px",
+        offset:"1",
+        stokeWidth:"1",
+        stokeColor:"black",
+        canvasId:"board",
+        cursorDown:false,
+        stokes:new Array(),
+        currentPoints:null,
+        startDraft:function(e){
+                //create a new arry of points
+                app.currentPoints = new Array();
+                //save initial points
+                app.currentPoints.push({x:e.pageX,y:e.pageY});
+                //draw in canvas
+                ctx.moveTo(e.pageX - app.offset, e.pageY - app.offset);
+                //change flag
+                app.cursorDown = true;
+               
+        },
+        finishDraft:function(){
+                //save a stroke
+                app.stokes.push(app.currentPoints);
+                //change flag to false (stop draw)
+                app.cursorDown = false;
+                //ends stroke
+                ctx.stroke();
+        },
+        draft:function(e){
+       
+                //save points
+                app.currentPoints.push({x:e.pageX,y:e.pageY});
+                //show what is stored in stroke atribute
+                app.strokeLog();
+                //draw in canvas
+                ctx.lineTo(e.pageX - app.offset, e.pageY - app.offset);
+                ctx.stroke();
+        },
+       
+        strokeLog:function(){
+                $('#mostra2').text(JSON.stringify(app.strokes));
+        },
+        init:function(){
+            $.event.special.swipe.start=function( event ) {
+                    var data = event.originalEvent.touches ?
+                     event.originalEvent.touches[ 0 ] : event;
+                     iniciaDesenho(data);
+                     console.log("chamou 2");
+                    return {
+                    time: ( new Date() ).getTime(),
+                    coords: [ data.pageX, data.pageY ],
+                     origin: $( event.target )
+            };
+            };
+            $.event.special.swipe.stop=function( event ) {
+  var data = event.originalEvent.touches ?
+      event.originalEvent.touches[ 0 ] : event;
+      desenha(data);
+      console.log("chamou 3");
+  return {
+      time: ( new Date() ).getTime(),
+      coords: [ data.pageX, data.pageY ]
+    };
+}
+               
+                          $("#board").on("swipe",function(e){
+                              console.log("chamou 1");
+                                //  desenha(e);
+                          });                      
+                                       
+                $('#board').hover(function(e) {
+                        if (isDown) {
+                                desenha(e);
+                        }
+                }, function() {
+
+                });
+                $('#board').mousemove(function(e) {
+                        if (isDown) {
+                                desenha(e);
+
+                        }
+                });
+
+                $('#board').mousedown(function(e) {
+               
+                        iniciaDesenho(e)
+               
+                }).mouseup(function() {
+                        //termina  desenho
+                        terminaDesenho();
+                });
+               
+        }      
+}
+if(typeof Object.create !== 'function'){
+        Object.create = function(o){
+               
+                var F = function(){};
+                F.prototype = o;
+                return new F();
+        };
+}
+
+var ponto = {x:0,y:0};
+
+var pontos = new Array();
+var pontosX = new Array();
+var pontosY = new Array();
+
+function desenha(e){
+       
+var pontoVariavel = Object.create(ponto);
+       
+        pontoVariavel.x = e.pageX;
+        pontoVariavel.y = e.pageY;
+        pontos.push(pontoVariavel);
+       
+        //$('#mostra').append("x" + e.pageX + " y" + e.pageY + " - ");
+        pontosX.push(e.pageX);
+        pontosY.push(e.pageY);
+       
+        ctx.lineTo(e.pageX - app.offset, e.pageY - app.offset);
+        ctx.stroke();
+}
+function iniciaDesenho(e){
+        //inicia desenho
+       
+        var pontoVariavel = Object.create(ponto);
+       
+        pontoVariavel.x = e.pageX;
+        pontoVariavel.y = e.pageY;
+        pontos.push(pontoVariavel);
+       
+        ctx.moveTo(e.pageX - app.offset, e.pageY - app.offset);
+        pontosX.push(e.pageX);
+        pontosY.push(e.pageY);
+        isDown = true;
+}
+function terminaDesenho(){
+        isDown = false;
+        ctx.stroke();
+}
+
+var offset = 20;
+var isDown = false;
+
+        $(document).on("pagecreate","#pageone",function(){
+                app.init();
+        });
+</script>
+<style type="text/css" media="all">
+#board {
+        cursor: crosshair;
+        width: 500px;
+        height: 500px;
+        border: 1px solid #bfbfbf;
+}
+</style>
+</head>
+<body>
+<div data-role="page" id="pageone">
+        <canvas id="board" width="500px" height="500px"
+                style="border: 1px solid #d3d3d3;">
+
+
+
+Your browser does not support the HTML5 canvas tag.
+
+
+
+</canvas>
+
+
+
+        <script>
+                var c = document.getElementById("board");
+
+                var ctx = c.getContext("2d");
+        </script>
+</div>
+
+</body>
+</html>

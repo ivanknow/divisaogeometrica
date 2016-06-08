@@ -12,9 +12,10 @@ App.const = {
 	verticePressedX : 0,
 	verticePressedY : 0,
 	stroke : 1,
+	traco:{"x1":0,"y1":0,"x2":0,"y2":0},
 };
 
- (function() {
+/* (function() {
 // initializes touch and scroll events
         var supportTouch = $.support.touch,
                 scrollEvent = "touchmove scroll",
@@ -89,4 +90,4 @@ App.const = {
             };
         });
 
-    })();
+    })();*/
