@@ -26,9 +26,9 @@ App.Figuras = {
 		case "triangulo":
 		this.color = {r:255,g:128,b:0};
 		this.vertices = [
-			{id:"v0",x:0,y:300},
+			{id:"v0",x:0,y:300,hidden:true},
 		 	{id:"v1",x:300,y : 0},
-			{id : "v2",	x : 600,y : 300},
+			{id : "v2",	x : 600,y : 300,hidden:true},
 			{id : "v3",	x : 300,y : 300}
 		];
 		this.arestas = 	[
@@ -76,13 +76,13 @@ break;
 		this.color={r:0,g:128,b:0		},
 
 		this.vertices=[
-		{id : "v0",x : 0,y : 0},
+		{id : "v0",x : 0,y : 0,hidden:true},
 		{id : "v0m",x : 200,y : 0},
-		{id : "v1",x : 400,	y : 0},
+		{id : "v1",x : 400,	y : 0,hidden:true},
 		{id : "v1m",x : 400,	y : 200},
-		{id : "v2",x : 400,y : 400},
+		{id : "v2",x : 400,y : 400,hidden:true},
 		{id : "v2m",x : 200,y : 400},
-		{id : "v3",x : 0,y : 400},
+		{id : "v3",x : 0,y : 400,hidden:true},
 		{id : "v3m",x : 0,y : 200}
 		];
 		this.arestas = [

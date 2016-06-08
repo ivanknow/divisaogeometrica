@@ -77,7 +77,8 @@ function removeVertice(v,figura) {
 function getPontoMedio(viid, vfid, figura) {
 	var vertice1 = getVerticeById(viid, figura);
 	var vertice2 = getVerticeById(vfid, figura);
-
+vertice1.hidden = true;
+vertice2.hidden = true;
 	var medio = {
 		id : viid + "m" + vfid,
 		x : 0,
@@ -91,9 +92,14 @@ function getPontoMedio(viid, vfid, figura) {
 }
 
 function geraVertice(vertice) {
-	var content = "<circle id='" + vertice.id + "' cx='" + vertice.x + "' cy='"
+var content = "";
+	if(!vertice.hidden){
+
+	content = "<circle id='" + vertice.id + "' cx='" + vertice.x + "' cy='"
 			+ vertice.y
 			+ "' r='40' fill='green' class='vertice alvo' stroke-width='"+App.const.stroke+"'/>";
+
+	}
 
 	return content;
 }
@@ -348,4 +354,8 @@ function inserePontoMedioFiguraAtual(figura){
 		{	vi : medio.id,   vf : maiorAresta.vf,	d : 0	}
 	);
 //}
+}
+
+function getVerticeMaisProximo(){
+	
 }

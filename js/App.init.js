@@ -6,7 +6,7 @@
 
 var App = App || {};
 App.init = function() {
-	
+
 		$("#board").on("mouseover", ".vertice", App.events.onMouseOverVerticeFindSecond);
 
 		$("#board").on("click",".vertice",App.events.onClickVerticeSelectFirst);
@@ -22,17 +22,14 @@ App.init = function() {
 		$("#zomm_mais").on("click",App.events.zoomMais);
 		$("#zomm_menos").on("click",App.events.zoomMenos);
 		$("#show_vertice").on("change",function(){
-			var valor = $(this).val(); 
+			var valor = $(this).val();
 			App.events.controlaVertice(valor);
 		});
-		$("#board").on("swipe",function(event){
-    		alert("Swipe detected!"+JSON.stringify(event.swipestart.coords));
-		});  
-		$("#board").on("swipeupdown",function(event){
-    		alert("Swipe  U detected!");
-		});  
-		
-		
+		//	$("#board").append("Swipe detected!"+JSON.stringify(event.swipestart.coords));
+		$("#board").on("swipe",App.events.divisaoSwipe);
+		$("#board").on("swipeupdown",App.events.divisaoSwipe);
+
+
 
 	};
 

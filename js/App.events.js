@@ -18,16 +18,16 @@ App.events =  {
 		for(var i=0;i<priibidas.length;i++){
 			$("#"+priibidas[i]).attr("class", "proibida vertice");
 		}
-		
+
 		//legado
 				var p = $(this);
- 
+
  				var newLine = geraLinha($(this).attr("cx"),
  						$(this).attr("cy"), $(this).attr("cx"),
  						$(this).attr("cy"));
  				newLine.setAttribute('id', 'linemoved');
  				newLine.setAttribute("stroke-dasharray","20,20");
- 
+
  				$("#board svg").append(newLine);
 
 //legado
@@ -41,7 +41,7 @@ App.events =  {
 
 			var id1 = $(".primeiro").attr("id");
 			var id2 = $(this).attr("id");
-			
+
 			//legado
 			var p = $(this);
   			var position = p.position();
@@ -50,9 +50,9 @@ App.events =  {
   			$("#linemoved").attr("x2", position.left - topMargin - App.const.margin);
   			$("#linemoved").attr("y2", position.top - leftMargin - App.const.margin);
   			$("#linemoved").removeAttr("id");
-  			
+
   			//legado
-			
+
 
 			App.const.mousePressed = false;
 
@@ -112,7 +112,7 @@ App.events =  {
 			$("#board").html(item);
 		}():1;
 	},
-	
+
 	controlaVertice:function(valor){
 	if(valor == "true"){
 		$(".vertice").show();
@@ -120,4 +120,13 @@ App.events =  {
 		$(".vertice").hide();
 	}
 	},
+	divisaoSwipe:function(evt){
+		var coords = {};
+		if(evt.swipestart){
+			var coords = evt.swipestart.coords;
+		}else{
+			var coords = [];
+		}
+		$("#board").append("Swipe detected!"+JSON.stringify(coords));
+	}
 };
