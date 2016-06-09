@@ -6,34 +6,34 @@
 
 var App = App || {};
 
-App.events =  {
-	onClickVerticeSelectFirst:function(evt){
+App.events = {
+	onClickVerticeSelectFirst: function(evt) {
 		App.const.mousePressed = true;
 
 		$(this).attr("class", "primeiro vertice");
 
 		var vid = $(this).attr("id");
 
-		var priibidas = getProibidas(vid,App.figuraAtual);
-		for(var i=0;i<priibidas.length;i++){
-			$("#"+priibidas[i]).attr("class", "proibida vertice");
+		var priibidas = getProibidas(vid, App.figuraAtual);
+		for (var i = 0; i < priibidas.length; i++) {
+			$("#" + priibidas[i]).attr("class", "proibida vertice");
 		}
 
 		//legado
-				var p = $(this);
+		var p = $(this);
 
- 				var newLine = geraLinha($(this).attr("cx"),
- 						$(this).attr("cy"), $(this).attr("cx"),
- 						$(this).attr("cy"));
- 				newLine.setAttribute('id', 'linemoved');
- 				newLine.setAttribute("stroke-dasharray","20,20");
+		var newLine = geraLinha($(this).attr("cx"),
+			$(this).attr("cy"), $(this).attr("cx"),
+			$(this).attr("cy"));
+		newLine.setAttribute('id', 'linemoved');
+		newLine.setAttribute("stroke-dasharray", "20,20");
 
- 				$("#board svg").append(newLine);
+		$("#board svg").append(newLine);
 
-//legado
+		//legado
 
 	},
-	onMouseOverVerticeFindSecond:function(evt){
+	onMouseOverVerticeFindSecond: function(evt) {
 
 		var hasClass = $(this).attr("class");
 		if (hasClass != "primeiro vertice" && hasClass != "proibida vertice" && App.const.mousePressed) {
@@ -44,21 +44,21 @@ App.events =  {
 
 			//legado
 			var p = $(this);
-  			var position = p.position();
-  			var topMargin = $(".figurasvg").offset().top;
-  			var leftMargin = $(".figurasvg").offset().left;
-  			$("#linemoved").attr("x2", position.left - topMargin - App.const.margin);
-  			$("#linemoved").attr("y2", position.top - leftMargin - App.const.margin);
-  			$("#linemoved").removeAttr("id");
+			var position = p.position();
+			var topMargin = $(".figurasvg").offset().top;
+			var leftMargin = $(".figurasvg").offset().left;
+			$("#linemoved").attr("x2", position.left - topMargin - App.const.margin);
+			$("#linemoved").attr("y2", position.top - leftMargin - App.const.margin);
+			$("#linemoved").removeAttr("id");
 
-  			//legado
+			//legado
 
 
 			App.const.mousePressed = false;
 
 
 			//inserir ponto medio
-			inserePontoMedio(id1,id2,App.figuraAtual);
+			inserePontoMedio(id1, id2, App.figuraAtual);
 
 			var item = App.figuraAtual.updateSVG();
 
@@ -68,7 +68,7 @@ App.events =  {
 		}
 
 	},
-	onClickShapeSelectShape:function(evt){
+	onClickShapeSelectShape: function(evt) {
 		var item = null;
 		var tipo = $(this).attr("tipo");
 
@@ -83,72 +83,77 @@ App.events =  {
 		$("#board  rect").attr("class", 'figura');
 
 	},
-	onMouseUpRemovePrimeiro:function(evt){
+	onMouseUpRemovePrimeiro: function(evt) {
 		App.const.mousePressed = false;
 		$(".primeiro").attr("class", "vertice");
 		$(".proibida").attr("class", "vertice");
 		$("#linemoved").remove();
 	},
-	onMouseMoveOnMainSVG:function(evt){
+	onMouseMoveOnMainSVG: function(evt) {
 		if (App.const.mousePressed === true) {
-			var topMargin =  $(".figurasvg").offset().top;
+			var topMargin = $(".figurasvg").offset().top;
 			var leftMargin = $(".figurasvg").offset().left;
 			$("#linemoved")
-			.attr("x2", evt.pageX - leftMargin - App.const.margin)
-			.attr("y2",evt.pageY - topMargin - App.const.margin);
+				.attr("x2", evt.pageX - leftMargin - App.const.margin)
+				.attr("y2", evt.pageY - topMargin - App.const.margin);
 		}
 	},
-	zoomMais:function(){
-		App.figuraAtual.viewBox?function(){
-			App.figuraAtual.viewBox.width -= 100;
-			var item = App.figuraAtual.updateSVG();
-			$("#board").html(item); }()
-			:console.log("figura n escolhida");
+	zoomMais: function() {
+		App.figuraAtual.viewBox ? function() {
+				App.figuraAtual.viewBox.width -= 100;
+				var item = App.figuraAtual.updateSVG();
+				$("#board").html(item);
+			}() :
+			console.log("figura n escolhida");
 	},
-	zoomMenos:function(){
-		App.figuraAtual.viewBox?function(){
+	zoomMenos: function() {
+		App.figuraAtual.viewBox ? function() {
 			App.figuraAtual.viewBox.width += 100;
 			var item = App.figuraAtual.updateSVG();
 			$("#board").html(item);
-		}():1;
+		}() : 1;
 	},
 
-	controlaVertice:function(valor){
-	if(valor == "true"){
-		$(".vertice").show();
-	}else{
-		$(".vertice").hide();
+	controlaVertice: function(valor) {
+		if (valor == "true") {
+			$(".vertice").show();
+		}
+		else {
+			$(".vertice").hide();
+		}
+	},
+	fimSwipe:function(e){
+		
+		console.log(JSON.stringify(App.const.traco));
+		var LtR = 0;
+		var UtD = 0;
+		if (Math.abs(App.const.traco.x1 - App.const.traco.x2) > 50) {
+			if (App.const.traco.x1 > App.const.traco.x2) {
+				LtR = -1;
+			}
+			else {
+				LtR = 1;
+			}
+		}
+
+		if (Math.abs(App.const.traco.y1 - App.const.traco.y2) > 50) {
+			if (App.const.traco.y1 > App.const.traco.y2) {
+				UtD = -1;
+			}
+			else {
+				UtD = 1;
+			}
+		}
+
+		console.log("L to R : " + LtR + "U to D:" + UtD);
+	},
+	startSwipe:function(e){
+		console.log("[x:" + (e.pageX) + ", y:" + e.pageY + "]");
+		App.const.traco.x1 = e.pageX || App.const.traco.x1;
+		App.const.traco.y1 = e.pageY || App.const.traco.y1;
+	},
+	updateSwipe:function(e){
+		App.const.traco.x2 = e.pageX;
+		App.const.traco.y2 = e.pageY;
 	}
-	},
-	divisaoSwipe:function(evt){
-		var coords = {};
-		if(evt.swipestart){
-			var coords = evt.swipestart.coords;
-		}else{
-			var coords = [];
-		}
-		$("#board").append("Swipe detected!"+JSON.stringify(coords));
-	},
-	
-	onSwiteVerticeSelectFirst:function(evt){
- 				var newLine = geraLinha(0,0,evt.pageX ,evt.pageY);
- 				newLine.setAttribute('id', 'linemoved');
- 				newLine.setAttribute("stroke-dasharray","20,20");
-
- 				$("#board svg").append(newLine);
-
-//legado
-
-	},
-	onSwipeOverVerticeFindSecond:function(evt){
-	
-  			var topMargin = $(".figurasvg").offset().top;
-  			var leftMargin = $(".figurasvg").offset().left;
-  			$("#linemoved").attr("x2", evt.pageX);
-  			$("#linemoved").attr("y2", evt.pageY);
-  			
-
-		}
-
-	,
 };
