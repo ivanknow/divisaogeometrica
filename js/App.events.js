@@ -145,15 +145,18 @@ App.events = {
 			}
 		}
 
-		console.log("L to R : " + LtR + "U to D:" + UtD);
+	$("#swipeLog").append(JSON.stringify(App.const.traco));
 	},
 	startSwipe:function(e){
 		console.log("[x:" + (e.pageX) + ", y:" + e.pageY + "]");
 		App.const.traco.x1 = e.pageX || App.const.traco.x1;
 		App.const.traco.y1 = e.pageY || App.const.traco.y1;
+		$("#swipeLog").append("START\n");
+		
 	},
 	updateSwipe:function(e){
-		App.const.traco.x2 = e.pageX;
-		App.const.traco.y2 = e.pageY;
+		App.const.traco.x2 = e.pageX||App.const.traco.x2;
+		App.const.traco.y2 = e.pageY||App.const.traco.y2;
+		$("#swipeLog").append("UPDATE\n");
 	}
 };

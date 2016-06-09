@@ -20,6 +20,7 @@ App.init = function() {
 	$(".shape").click(App.events.onClickShapeSelectShape);
 
 	$("#zomm_mais").on("click", App.events.zoomMais);
+	
 	$("#zomm_menos").on("click", App.events.zoomMenos);
 	$("#show_vertice").on("change", function() {
 		var valor = $(this).val();
@@ -29,7 +30,7 @@ App.init = function() {
 
 	$("#board").on("swipe", App.events.startSwipe);
 
-	$("#board").on("mouseup", App.events.fimSwipe);
+	$("#board").on("vmouseup", App.events.fimSwipe);
 
 	$.event.special.swipe.start = function(event) {
 		var data = event.originalEvent.touches ?
@@ -55,7 +56,10 @@ App.init = function() {
 			time: (new Date()).getTime(),
 			coords: [data.pageX, data.pageY]
 		};
-	}
+	},
+	$("#limpaLog").on("click", function(){
+			$("#swipeLog").text("");
+	});
 };
 
 

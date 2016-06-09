@@ -10,7 +10,7 @@ App.Figuras = {
 	viewBox:{
 		minx:-100,
 		miny: 20,
-		width:1000,
+		width:900,
 		height:380
 	},
 	init:function(type){
@@ -19,7 +19,7 @@ App.Figuras = {
 		this.type = type;
 		this.viewBox = {minx:-100,
 			miny: 20,
-			width:1000,
+			width:900,
 			height:380
 		};
 		switch (type) {
