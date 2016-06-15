@@ -75,10 +75,17 @@ function removeVertice(v,figura) {
 }
 
 function getPontoMedio(viid, vfid, figura) {
+	console.log(viid);
+	console.log(vfid);
 	var vertice1 = getVerticeById(viid, figura);
 	var vertice2 = getVerticeById(vfid, figura);
-vertice1.hidden = true;
-vertice2.hidden = true;
+	
+	if(figura.type!="quadrado2"){
+	vertice1.hidden = true;
+	vertice2.hidden = true;
+	}
+	
+	
 	var medio = {
 		id : viid + "m" + vfid,
 		x : 0,
@@ -145,10 +152,34 @@ function getNosAdjacentes(v, figura) {
 
 function getProibidas(v, figura) {
 	var vertice = getVerticeById(v, figura);
-
 	var proibidas = new Array();
+
+	if(figura.type==="quadrado2"){
+		var indice = getVerticeIndex(v,figura);
+		var metadeTamanho = figura.vertices.length/2;
+		var indiceOposto = 0;
+		if(indice<metadeTamanho){
+			indiceOposto = metadeTamanho + indice;
+		}else{
+			indiceOposto = indice - metadeTamanho;
+		}
+		
+		console.log("OPOSTO"+indiceOposto);
+		
+		
+		for(var i=0;i<figura.vertices.length;i++){
+			if(i!=indiceOposto && i!=indice ){
+				proibidas.push(figura.vertices[i].id);
+			}
+			
+		}
+		
+	}else{
+
 	proibidas = (getNosAdjacentes(v, figura));
-	//TODO add colineares
+	
+	}
+	
 	return proibidas;
 
 }
@@ -315,7 +346,11 @@ function getFiguraCenter(vertices){
 
 function writeTextCentered(points,time){
 	var center = getFiguraCenter(points);
-	return "<text class='noselect' font-size='"+(50-(time*8))+"'  style='fill:#000;' x='"+(center.x-33)+"' y='"+(center.y+20)+"'>"+1+"/"+Math.pow(2,time+1)+"</text>";
+	
+	var valor = 1+"/"+Math.pow(2,time+1);
+	valor = valor=="1/1"?"1":valor;
+	
+	return App.config.exibeNumeros?"<text class='noselect' font-size='42'  style='fill:#000;' x='"+(center.x-21)+"' y='"+(center.y)+"'>"+valor+"</text>":"";
 
 }
 
@@ -347,12 +382,15 @@ function inserePontoMedioFiguraAtual(figura){
 
 	var nextIndex = getVerticeIndex(maiorAresta.vi,figura);
 	//adiciona ponto medio no lugar certo
+	if(!(figura.type == "quadrado2" &&  figura.vertices.length%2===0)){
 	figura.vertices.splice(nextIndex+1,0,medio);
 	//adiciona arestas
 	figura.arestas.push(
 		{	vi : maiorAresta.vi,	vf : medio.id,	d : 0},
 		{	vi : medio.id,   vf : maiorAresta.vf,	d : 0	}
-	);
+	);	
+	}
+	
 //}
 }
 

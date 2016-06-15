@@ -20,7 +20,7 @@ App.events = {
 		}
 
 		//legado
-		var p = $(this);
+	/*	var p = $(this);
 
 		var newLine = geraLinha($(this).attr("cx"),
 			$(this).attr("cy"), $(this).attr("cx"),
@@ -30,7 +30,7 @@ App.events = {
 
 		$("#board svg").append(newLine);
 
-		//legado
+		//legado*/
 
 	},
 	onMouseOverVerticeFindSecond: function(evt) {
@@ -42,7 +42,7 @@ App.events = {
 			var id1 = $(".primeiro").attr("id");
 			var id2 = $(this).attr("id");
 
-			//legado
+			/*/legado
 			var p = $(this);
 			var position = p.position();
 			var topMargin = $(".figurasvg").offset().top;
@@ -51,7 +51,7 @@ App.events = {
 			$("#linemoved").attr("y2", position.top - leftMargin - App.const.margin);
 			$("#linemoved").removeAttr("id");
 
-			//legado
+			//legado*/
 
 
 			App.const.mousePressed = false;
@@ -146,17 +146,74 @@ App.events = {
 		}
 
 	$("#swipeLog").append(JSON.stringify(App.const.traco));
+	
+		
+		
+	
 	},
 	startSwipe:function(e){
 		console.log("[x:" + (e.pageX) + ", y:" + e.pageY + "]");
 		App.const.traco.x1 = e.pageX || App.const.traco.x1;
 		App.const.traco.y1 = e.pageY || App.const.traco.y1;
-		$("#swipeLog").append("START\n");
+	//	$("#swipeLog").append("START\n");
 		
 	},
 	updateSwipe:function(e){
 		App.const.traco.x2 = e.pageX||App.const.traco.x2;
 		App.const.traco.y2 = e.pageY||App.const.traco.y2;
-		$("#swipeLog").append("UPDATE\n");
+	//	$("#swipeLog").append("UPDATE\n");
+	
+		var v1 = false;
+		var v2 = false;
+		for(var i = 0;i<App.figuraAtual.vertices.length;i++){
+			if(!App.figuraAtual.vertices[i].hidden){
+				v1 = App.figuraAtual.vertices[i];
+				console.log(v1)
+				break;
+			}
+		}
+		
+		for(var i = 0;i<App.figuraAtual.vertices.length;i++){
+			var item = App.figuraAtual.vertices[i] 
+			if((!item.hidden) && (item.id!=v1.id) && (getNosAdjacentes(v1.id,App.figuraAtual).indexOf(item.id)==-1)){
+				v2 = App.figuraAtual.vertices[i];
+				console.log(v2)
+				break;
+			}
+		}
+		
+		
+		if(v1 && v2){
+			console.log("mostra")
+		inserePontoMedio(v1.id, v2.id, App.figuraAtual);
+		
+			var item = App.figuraAtual.updateSVG();
+
+			$("#board").html(item);
+			
+		}
+	}
+	,
+	changeCheckExibeNumeros:function(evt){
+		
+		var checked =$(this).prop( "checked");
+		App.config.exibeNumeros = checked;
+		
+		var item = App.figuraAtual.updateSVG();
+
+			$("#board").html(item);
+			$(".primeiro").attr("class", "vertice");
+			$(".proibida").attr("class", "vertice");
+	
+	},
+	changeCheckExibeVertices:function(evt){
+		
+		var checked =$(this).prop( "checked");
+		App.config.exibeVertices = checked;
+		if(App.config.exibeVertices){
+			$(".vertice").show();
+		}else{
+			$(".vertice").hide();
+		}
 	}
 };

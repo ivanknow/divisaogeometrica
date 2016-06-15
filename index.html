@@ -1,97 +1,124 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Divisão Geométrica</title>
-  <link rel="shortcut icon" href="img/logo.png">
-<meta charset="utf-8">
-<link href="lib/jquery-mobile-bower/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
-<link href="lib/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">
-<link href="lib/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <title>Divisão Geométrica</title>
+    <link rel="shortcut icon" href="img/logo.png">
+    <meta charset="utf-8">
+    <link href="lib/jquery-mobile-bower/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+    <link href="lib/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
 
 
 
-<style>
-
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -khtml-user-select: none;    /* Konqueror */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none;       /* IE/Edge */
-  user-select: none;           /* non-prefixed version, currently
+    <style>
+    text{
+        cursor:crosshair;
+    }
+        .noselect {
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Chrome/Safari/Opera */
+            -khtml-user-select: none;
+            /* Konqueror */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* IE/Edge */
+            user-select: none;
+            /* non-prefixed version, currently
                                   not supported by any browser */
-}
-.vertice{
-stroke:black;
-opacity:0.4;
-}
-.primeiro{
-fill:blue;
-stroke:#33CC00;
-opacity:0.8;
-}
-
-
-
-.proibida{
-stroke:red;
-fill:darkred;
-opacity:0.4;
-}
-
-.figurinhas {
-    height:100px;
-    width:100px;
-    border: 1px dashed #000;
-}
-
-.figura {
-    height:400px;
-    width:400px;
-}
-.figurasvg {
-    height:440px;
-    width:100%;
-    padding:20px;
-}
-
-.line{
-    stroke:rgb(0,0,0);
-    stroke-width:1;
-
-}
-
-#linemoved{
-    stroke:rgb(0,0,0);
-    stroke-width:10;
-
-}
-
-</style>
+        }
+        
+        .vertice {
+            stroke: black;
+            opacity: 0.4;
+        }
+        
+        .primeiro {
+            fill: blue;
+            stroke: #33CC00;
+            opacity: 0.8;
+        }
+        
+        .proibida {
+            stroke: red;
+            fill: darkred;
+            opacity: 0.4;
+        }
+        
+        .figurinhas {
+            height: 100px;
+            width: 100px;
+            border: 1px dashed #000;
+        }
+        
+        .svgfooter {
+            height: 50px;
+            width: 100%;
+        }
+        
+        .figura {
+            height: 400px;
+            width: 400px;
+        }
+        
+        .figurasvg {
+            height: 440px;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .line {
+            stroke: rgb(0, 0, 0);
+            stroke-width: 1;
+        }
+        
+        #linemoved {
+            stroke: rgb(0, 0, 0);
+            stroke-width: 10;
+        }
+    </style>
 </head>
+
 <body>
-	<div class="container">
+    <div id="login" data-role="page">
+        <div role="main" class="ui-content">
 
-<!--			<h3 class="noselect" id="titulo">Divisão Geométrica</h3>-->
+            <div class="container">
 
-		<div>
-      <div id="menu" class="span2">
+                <!--			<h3 class="noselect" id="titulo">Divisão Geométrica</h3>-->
 
-        <svg  x='0' y='0' class='main figurinhas'>
-            <polygon  points="0,100 50,20 100,100" class='shape figurinhas' tipo="triangulo"  style='fill:#FFFF00;'  />
+                <div>
+                    <div id="menu" class="span2">
+
+                        <svg x='0' y='0' class='main figurinhas'>
+            <polygon  points="0,100 50,20 100,100" class='shape figurinhas' tipo="triangulo"  style='fill:#FFFF00;' >
+                 <!--<animateTransform
+            attributeName="transform"
+            begin="0s"
+            dur="0.5s"
+            type="rotate"
+            from="0 60 60"
+            to="360 60 60"
+            repeatCount="indefinite"
+        />-->
+            </polygon>
 
         </svg>
-          <svg   x='0' y='0' class='main figurinhas '>
+                        <!-- <svg   x='0' y='0' class='main figurinhas '>
 
-            <polygon  points="0,0 100,0 100,100 0,100" class='shape figurinhas' tipo="quadrado"   style='fill:#87CEFA;' />
+            <polygon  points="0,0 100,0 100,100 0,100" class='shape figurinhas' tipo="quadrado"   style='fill:#87CEFA;' >
+            </polygon>
 
 
-        </svg>
-        <svg  x='0' y='0' class='main figurinhas'>
+        </svg>-->
+                        <svg x='0' y='0' class='main figurinhas'>
             <polygon  points="0,50 50,100 100,50 50,0" class='shape figurinhas' tipo="losango"   style='fill:#FF0066;' />
 
         </svg>
-          <svg   x='0' y='0' class='main figurinhas quadrado'>
+                        <svg x='0' y='0' class='main figurinhas quadrado'>
 
             <polygon  points="0,0 100,0 100,100 0,100" class='shape figurinhas' tipo="quadrado2"   style='fill:#FFA500;' />
 
@@ -99,34 +126,86 @@ opacity:0.4;
         </svg>
 
 
-      </div>
- 		<div id="board" class="span8" >
+                    </div>
+                    <div id="board" class="span8">
 
 
- 		</div>
-    <div id="board" class="span1" >
+                    </div>
+                    <div id="board" class="span1">
 
-      <button id="zomm_mais">+ </button>
-      <button id="zomm_menos">- </button>
-     <select id="show_vertice">
-       <option value="true">Mostra Arestas</option>
-       <option value="false">Esconde Arestas</option>
-     </select>
-     <button id="limpaLog">Limpa </button>
-     <span id="swipeLog">SWIPE</span>
- 		</div>
+                        <button id="zomm_mais">+ </button>
+                        <button id="zomm_menos">- </button>
+                        
+                        <a href="#config" class="ui-shadow ui-btn ui-corner-all ui-btn-inline " data-transition="pop"><i class="icon-wrench"></i>&nbsp;</a>
+                    </div>
 
-  </div>
-	</div>
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/jquery-mobile-bower/js/jquery.mobile-1.4.5.min.js"></script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="dialog" data-role="page" data-dialog="true" data-rel="dialog">
+
+        <div data-role="header" data-theme="b">
+            <h1>Reta</h1>
+        </div>
+
+        <div role="main" class="ui-content">
 
 
-  <script src="js/App.Util.js"></script>
-  <script src="js/App.events.js"></script>
-  <script src="js/App.Figura.Atual.js"></script>
-  <script src="js/App.init.js"></script>
-  <script src="js/App.Modelos.Figuras.js"></script>
-  <script src="js/App.js"></script>
+            <svg x='0' y='0' class="svgfooter">
+            <text class='noselect' font-size='20'  style='fill:#000;' x='10' y='30'>0</text>
+            <circle id="v3" cx="10" cy="35" r="3" fill="#000"  ></circle>
+            <text class='noselect' font-size='20'  style='fill:#000;' x='70' y='30'>1/2</text>
+            <circle id="v3" cx="80" cy="35" r="3" fill="#000"  ></circle>
+            <text class='noselect' font-size='20'  style='fill:#000;' x='150' y='30'>1</text>
+            <circle id="v3" cx="150" cy="35" r="3" fill="#000"  ></circle>
+            <text class='noselect' font-size='20'  style='fill:#000;' x='220' y='30'>3/2</text>
+            <circle id="v3" cx="220" cy="35" r="3" fill="#000"  ></circle>
+            <text class='noselect' font-size='20'  style='fill:#000;' x='290' y='30'>2</text>
+            <circle id="v3" cx="290" cy="35" r="3" fill="#000"  ></circle>
+            <text class='noselect' font-size='20'  style='fill:#000;' x='430' y='30'>3</text>
+            <polygon  points="430,30 440,35 430,40"  style='fill:#000;'  x='362' y='30' />
+            <circle id="v3" cx="10" cy="35" r="3" fill="#000"  ></circle>
+	        <line x1="10" y1="35" x2="430" y2="35" style="stroke:rgb(0,0,0);stroke-width:2" />
+	         
+	     </svg>
+
+        </div>
+
+
+
+    </div>
+
+    <div id="config" data-role="page" data-dialog="true" data-rel="dialog">
+
+        <div data-role="header" data-theme="b">
+            <h1>Configurações</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <label class="checkbox">  <input type="checkbox" id="show_numero">&nbsp;&nbsp;Mostra Números </label>
+            <label class="checkbox">  <input type="checkbox" checked  id="show_vertices"> &nbsp;&nbsp;Mostra Vértices</label>
+            <a style="display:none;" id="btnModalReta" href="#dialog" class="ui-shadow ui-btn ui-corner-all ui-btn-inline btn" data-transition="pop">Open dialog</a>
+          
+
+        </div>
+
+
+
+    </div>
+
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/jquery-mobile-bower/js/jquery.mobile-1.4.5.min.js"></script>
+
+
+    <script src="js/App.Util.js"></script>
+    <script src="js/App.events.js"></script>
+    <script src="js/App.Figura.Atual.js"></script>
+    <script src="js/App.init.js"></script>
+    <script src="js/App.Modelos.Figuras.js"></script>
+    <script src="js/App.js"></script>
 </body>
+
 </html>

@@ -19,3 +19,8 @@ App.const = {
         "y2": 0
     },
 };
+
+App.config = {
+    exibeNumeros : false,
+    exibeVertices: false,
+};
