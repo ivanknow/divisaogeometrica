@@ -17,6 +17,8 @@ function getVerticeById(verticeId, figura) {
 			return vi;
 		}
 	}
+	hideAllVertices(figura);
+	return {id:"malandro",x:0,y:0};
 }
 
 function contemAresta(vi, vf, figura) {
@@ -91,7 +93,7 @@ function getPontoMedio(viid, vfid, figura) {
 		x : 0,
 		y : 0
 	};
-
+	
 	medio.x = (vertice1.x + vertice2.x) / 2;
 	medio.y = (vertice1.y + vertice2.y) / 2;
 
@@ -392,6 +394,12 @@ function inserePontoMedioFiguraAtual(figura){
 	}
 	
 //}
+}
+
+function hideAllVertices(figura){
+	for(var i=0;i<figura.vertices.length;i++){
+		figura.vertices[i].hidden = true;
+	}
 }
 
 function getVerticeMaisProximo(){

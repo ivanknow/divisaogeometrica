@@ -199,7 +199,7 @@ App.events = {
 		var checked =$(this).prop( "checked");
 		App.config.exibeNumeros = checked;
 		
-		var item = App.figuraAtual.updateSVG();
+		var item = App.figuraAtual.updateSVG ? App.figuraAtual.updateSVG() : "";
 
 			$("#board").html(item);
 			$(".primeiro").attr("class", "vertice");

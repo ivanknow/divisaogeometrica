@@ -29,7 +29,8 @@ App.init = function() {
 	$("#show_numero").on("change",App.events.changeCheckExibeNumeros);
 	$("#show_vertices").on("change",App.events.changeCheckExibeVertices);
 	$("#board").on("click","text",function(){
-		
+		var text = $(this).text();
+		alert(text)
 		$("#btnModalReta").click();
 	});
 
