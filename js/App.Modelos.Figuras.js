@@ -10,7 +10,7 @@ App.Figuras = {
 	viewBox: {
 		minx: -100,
 		miny: 20,
-		width: 900,
+		width: 1000,
 		height: 380
 	},
 	init: function(type) {
@@ -20,15 +20,15 @@ App.Figuras = {
 		this.viewBox = {
 			minx: -100,
 			miny: 20,
-			width: 900,
+			width: 1000,
 			height: 380
 		};
 		switch (type) {
 			case "triangulo":
 				this.color = {
-					r: 255,
-					g: 128,
-					b: 0
+					r: 186,
+					g: 0,
+					b: 221
 				};
 				this.vertices = [{
 					id: "v0",
@@ -71,9 +71,9 @@ App.Figuras = {
 			case "quadrado":
 
 				this.color = {
-					r: 0,
+					r: 255,
 					g: 0,
-					b: 128
+					b: 255
 				};
 				this.vertices = [{
 					id: "v0",
@@ -113,9 +113,9 @@ App.Figuras = {
 				break;
 			case "losango":
 				this.color = {
-					r: 255,
-					g: 0,
-					b: 0
+					r: 50,
+					g: 205,
+					b: 50
 				};
 				this.vertices = [{
 					id: "v0",
@@ -154,11 +154,11 @@ App.Figuras = {
 				}];
 				break;
 			case "quadrado2":
-				this.color = {
-						r: 0,
-						g: 128,
-						b: 0
-					},
+			this.color = {
+				r: 255,
+				g: 0,
+				b: 255
+			};
 
 					this.vertices = [{
 						id: "v0",
@@ -274,7 +274,13 @@ App.Figuras = {
 		for (i = 0; i < this.vertices.length; i++) {
 			points += "" + this.vertices[i].x + "," + this.vertices[i].y + " ";
 		}
-		return "<polygon points='" + points + "' style='" + getColorCss(this.restos.length) + "' />";
+		var style = "";
+		if(this.restos.length == 0){
+			style = "fill:rgb("+(this.color.r)+","+(this.color.g)+","+(this.color.b)+");";;
+		}else{
+			style = getColorCss(this.restos.length);
+		}
+		return "<polygon points='" + points + "' style='" + style + "' />";
 	},
 	generatePolygonResto: function() {
 		var points = "";
